@@ -71,8 +71,40 @@ public class DataReadWriteObject<T> implements Serializable{
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                oos.close();
+            } catch (Exception e) {
+
+            }
         }
         return false;
     }
+    
+    public boolean writeFile(List<T> list) {
+        File file = new File(FILE_NAME);
+        ObjectOutputStream oos = null;
+        try {
+            if (file.isFile()) {
+                oos = new MyObjectOutputStream(new FileOutputStream(file, true));
+            } else {
+                oos = new ObjectOutputStream(new FileOutputStream(file, true));
+            }
+            for(T t : list) {
+                oos.writeObject(t);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                oos.close();
+            } catch (Exception e) {
+
+            }
+        }
+        return false;
+    }
+    
 
 }

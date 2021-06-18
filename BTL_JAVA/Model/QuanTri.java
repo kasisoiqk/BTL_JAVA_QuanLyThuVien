@@ -1,8 +1,13 @@
 package BTL_JAVA.Model;
 
+import java.io.Serializable;
 
-public class QuanTri extends Nguoi {
+public class QuanTri extends Nguoi implements Serializable{
     private int maTK;
+    
+    public QuanTri() {
+        
+    }
 
     public QuanTri(int ma, String ten, Date ngaySinh, String gioiTinh, String sdt, String email, int maTK) {
         super(ma, ten, ngaySinh, gioiTinh, sdt, email);
@@ -26,6 +31,7 @@ public class QuanTri extends Nguoi {
     @Override
     public void xuat() {
         super.xuat();
+        System.out.println(" |");
     }
 
 }

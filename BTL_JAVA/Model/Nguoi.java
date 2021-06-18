@@ -1,9 +1,8 @@
 package BTL_JAVA.Model;
 
-import java.io.Serializable;
 import java.util.Scanner;
 
-public class Nguoi implements Serializable{
+public class Nguoi{
     private int ma;
     private String ten;
     private Date ngaySinh;
@@ -91,4 +90,5 @@ public class Nguoi implements Serializable{
         System.out.format("| %-8s | %-25s | %-10s | %-8s | %-15s | %-20s", "PS" + 
                 ma, ten, ngaySinh, gioiTinh, sdt, email);
     }
+    
 }
