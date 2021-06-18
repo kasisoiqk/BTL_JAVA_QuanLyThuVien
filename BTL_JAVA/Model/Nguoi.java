@@ -11,8 +11,8 @@ public class Nguoi implements Serializable{
     private String sdt;
     private String email;
 
-    public void Nguoi() {
-
+    public Nguoi() {
+        ngaySinh = new Date();
     }
 
     public Nguoi(int ma, String ten, Date ngaySinh, String gioiTinh, String sdt, String email) {
