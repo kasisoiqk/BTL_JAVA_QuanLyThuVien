@@ -50,8 +50,6 @@ public class QuanTriManager {
         qtMn.them();
 
         QuanTriDAO quan = new QuanTriDAO();
-//        quan.write(new QuanTri(4, "A", new Date(1, 1, 1), "Nam", "09", "sauysah", 0));
-//        quan.write(new QuanTri(4, "A", new Date(1, 1, 1), "Nam", "09", "sauysah", 0));
         List<QuanTri> list = quan.read();
         for(QuanTri qt : list){
             qt.xuat();
