@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataReadWriteObject<T> implements Serializable{
+public class DataReadWriteObject<T> implements Serializable {
     private String FILE_NAME;
 
     public DataReadWriteObject() {
@@ -33,19 +33,19 @@ public class DataReadWriteObject<T> implements Serializable{
         File file = new File(FILE_NAME);
         ObjectInputStream ois = null;
         try {
-            if (file.isFile()) {
+            if(file.isFile()) {
                 ois = new ObjectInputStream(new FileInputStream(file));
                 Object obj = ois.readObject();
                 while (obj != null) {
-                    list.add((T)obj);
+                    list.add((T) obj);
                     try {
                         obj = ois.readObject();
                     } catch (Exception e) {
                         obj = null;
                     }
                 }
-                return list;
             }
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -55,7 +55,7 @@ public class DataReadWriteObject<T> implements Serializable{
 
             }
         }
-        return null;
+        return list;
     }
 
     public boolean writeFile(T t) {
@@ -80,17 +80,17 @@ public class DataReadWriteObject<T> implements Serializable{
         }
         return false;
     }
-    
-    public boolean writeFile(List<T> list) {
+
+    public boolean writeFile(List<T> list, boolean isNewFile) {
         File file = new File(FILE_NAME);
         ObjectOutputStream oos = null;
         try {
-            if (file.isFile()) {
+            if (file.isFile() && isNewFile == false) {
                 oos = new MyObjectOutputStream(new FileOutputStream(file, true));
             } else {
                 oos = new ObjectOutputStream(new FileOutputStream(file, true));
             }
-            for(T t : list) {
+            for (T t : list) {
                 oos.writeObject(t);
             }
             return true;
@@ -105,6 +105,5 @@ public class DataReadWriteObject<T> implements Serializable{
         }
         return false;
     }
-    
 
 }

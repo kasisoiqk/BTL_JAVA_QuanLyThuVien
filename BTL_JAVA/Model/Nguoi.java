@@ -1,8 +1,9 @@
 package BTL_JAVA.Model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Nguoi{
+public class Nguoi implements Serializable{
     private int ma;
     private String ten;
     private Date ngaySinh;
