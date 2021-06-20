@@ -7,6 +7,7 @@ import BTL_JAVA.Model.QuanTri;
 import java.util.List;
 
 public class QuanTriManager {
+
     private List<QuanTri> list;
     private QuanTriDAO quanTriDAO;
 
@@ -21,37 +22,44 @@ public class QuanTriManager {
         qt.nhap();
         qt.setMa(ma);
 
-        return quanTriDAO.write(qt);
+        list.add(qt);
+
+        return quanTriDAO.write(list, true);
     }
-    
+
     public boolean sua(QuanTri quanTri, int ma) {
-        for(QuanTri qt : list) {
-            if(qt.getMa() == ma) {
-                qt = quanTri;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getMa() == ma) {
+                list.set(i, quanTri);
                 return quanTriDAO.write(list, true);
             }
         }
         return false;
     }
-    
+
     public boolean xoa(int ma) {
-        for(QuanTri qt : list) {
-            if(qt.getMa() == ma) {
-                list.remove(qt);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getMa() == ma) {
+                list.remove(i);
                 return quanTriDAO.write(list, true);
             }
         }
         return false;
-    } 
+    }
 
     public static void main(String[] args) {
         QuanTriManager qtMn = new QuanTriManager();
+
+        //qtMn.them();
+        if (qtMn.sua(new QuanTri(2, "Linh", new Date(1, 1, 1), "Nu", "1", "1", 0), 2)) {
+            System.out.println("A");
+        }
         
-        qtMn.them();
+        qtMn.xoa(3);
 
         QuanTriDAO quan = new QuanTriDAO();
         List<QuanTri> list = quan.read();
-        for(QuanTri qt : list){
+        for (QuanTri qt : list) {
             qt.xuat();
         }
 

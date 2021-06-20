@@ -86,9 +86,9 @@ public class DataReadWriteObject<T> implements Serializable {
         ObjectOutputStream oos = null;
         try {
             if (file.isFile() && isNewFile == false) {
-                oos = new MyObjectOutputStream(new FileOutputStream(file, true));
+                oos = new MyObjectOutputStream(new FileOutputStream(file));
             } else {
-                oos = new ObjectOutputStream(new FileOutputStream(file, true));
+                oos = new ObjectOutputStream(new FileOutputStream(file));
             }
             for (T t : list) {
                 oos.writeObject(t);
