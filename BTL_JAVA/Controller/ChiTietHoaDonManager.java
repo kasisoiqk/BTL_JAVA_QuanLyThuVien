@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Dell
  */
-public class ChiTietHoaDonManager implements Serializable{
+public class ChiTietHoaDonManager {
     private List<ChiTietHoaDon> list ;
     private ChiTietHoaDonDao cthoadon;
     

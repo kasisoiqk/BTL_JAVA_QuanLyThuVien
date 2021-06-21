@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Class;
+package BTL_JAVA.Model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  *
  * @author Laptopkhanhtran.vn
  */
-public class Sach {
+public class Sach implements Serializable{
     private  int maSach;
     private String tenSach;
     private String tacGia;

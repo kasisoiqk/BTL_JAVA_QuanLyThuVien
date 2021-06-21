@@ -23,17 +23,17 @@ public class HoaDonManager implements Serializable{
         list = hoadondao.read();
     }
     public boolean them() {
-        int maHd = (list.size() > 0) ? (list.get(list.size() - 1).getMaHd() + 1) : 1;
+        int maHd = (list.size() > 0) ? (list.get(list.size() - 1).getMaHoaDon() + 1) : 1;
         HoaDon hd = new HoaDon();
-        hd.Nhap();
-        hd.setMaHd(maHd);
+        hd.nhap();
+        hd.setMaHoaDon(maHd);
 
         return hoadondao.write(hd);
     }
     
     public boolean sua(HoaDon hoadon, int maHd) {
         for(HoaDon hd : list) {
-            if(hd.getMaHd() == maHd) {
+            if(hd.getMaHoaDon() == maHd) {
                 hd = hoadon;
                 return hoadondao.write(list, true);
             }
@@ -43,7 +43,7 @@ public class HoaDonManager implements Serializable{
     
     public boolean xoa(int maHd) {
         for(HoaDon hd : list) {
-            if(hd.getMaHd() == maHd) {
+            if(hd.getMaHoaDon() == maHd) {
                 list.remove(hd);
                 return hoadondao.write(list, true);
             }

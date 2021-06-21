@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
-import DAO.NhaCungCapDAO;
-import Model.Date;
-import Model.NhaCungCap;
+package BTL_JAVA.Controller;
+
+import BTL_JAVA.DAO.NhaCungCapDAO;
+import BTL_JAVA.Model.Date;
+import BTL_JAVA.Model.NhaCungCap;
 import java.util.List;
 /**
  *

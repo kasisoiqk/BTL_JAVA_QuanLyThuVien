@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package BTL_JAVA.Model;
 
 import java.io.Serializable;
 import java.util.Scanner;

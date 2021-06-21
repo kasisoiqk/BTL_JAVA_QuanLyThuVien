@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Manager;
+package BTL_JAVA.Controller;
 
-import Class.Sach;
-import Read_Write.SachDao;
+import BTL_JAVA.Model.Sach;
+import BTL_JAVA.DAO.SachDAO;
 import java.util.List;
 
 /**
@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class SachManager {
     private List<Sach> list;
-    private SachDao sachDao;
+    private SachDAO sachDao;
 
     public SachManager() {
-        sachDao=new SachDao();
+        sachDao=new SachDAO();
         list=sachDao.read();
     }
     public boolean them(){
@@ -50,9 +50,9 @@ public class SachManager {
     public static void main(String[] args) {
         SachManager sm=new SachManager();
         //sm.them();
-        sm.sua(new Sach(3, "Cha giau cha ngheo", "Thay khanh", "Trang an", "21/06/2021", 100, 50,"Tai lieu", 100000), 2);
-        //sm.xoa(002);
-        SachDao sDao=new SachDao();
+        sm.sua(new Sach(1, "Cha giau cha ngheo", "Thay khanh", "Trang an", "21/06/2021", 100, 50,"Tai lieu", 100000), 2);
+        sm.xoa(001);
+        SachDAO sDao=new SachDAO();
         List<Sach> list=sDao.read();
         for (Sach sach : list) {
             sach.xuat();

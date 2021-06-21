@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Manager;
+package BTL_JAVA.Controller;
 
-import Class.TaiKhoan;
-import Read_Write.TaiKhoanDao;
+import BTL_JAVA.Model.TaiKhoan;
+import BTL_JAVA.DAO.TaiKhoanDao;
 import java.util.List;
 
 /**
@@ -49,9 +49,9 @@ public class TaiKhoanManager {
     }
     public static void main(String[] args) {
         TaiKhoanManager tkmn=new TaiKhoanManager();
-        //tkmn.them();
-        //tkmn.sua(new TaiKhoan(2, "tien dat", "123456", "Thu Thu"), 1);
-        tkmn.xoa(3);
+//        tkmn.them();
+//        tkmn.sua(new TaiKhoan(1, "tien dat", "123456", "Thu Thu"), 1);
+        tkmn.xoa(1);
         TaiKhoanDao tkD=new TaiKhoanDao();
         List<TaiKhoan> list=tkD.read();
         for (TaiKhoan taiKhoan : list) {
