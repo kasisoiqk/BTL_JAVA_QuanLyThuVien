@@ -1,18 +1,27 @@
-package BTL_JAVA.Model;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class NhaCungCap{
+/**
+ *
+ * @author BENH VIEN CONG NGHE
+ */
+public class NhaCungCap implements Serializable{
     private int MaNhaCungCap;
     private String TenNhaCungCap;
     private String DiaChi;
-    private int sdtncc;
+    private String sdtncc;
     private String emailncc;
-    Scanner sc= new Scanner(System.in);
     public NhaCungCap() {
     }
 
-    public NhaCungCap(int MaNhaCungCap, String TenNhaCungCap, String DiaChi, int sdtncc, String emailncc) {
+    public NhaCungCap(int MaNhaCungCap, String TenNhaCungCap, String DiaChi, String sdtncc, String emailncc) {
         this.MaNhaCungCap = MaNhaCungCap;
         this.TenNhaCungCap = TenNhaCungCap;
         this.DiaChi = DiaChi;
@@ -44,11 +53,11 @@ public class NhaCungCap{
         this.DiaChi = DiaChi;
     }
 
-    public int getSdtncc() {
+    public String getSdtncc() {
         return sdtncc;
     }
 
-    public void setSdtncc(int sdtncc) {
+    public void setSdtncc(String sdtncc) {
         this.sdtncc = sdtncc;
     }
 
@@ -68,12 +77,17 @@ public class NhaCungCap{
         System.out.println("Nhap dia chi: ");
         this.DiaChi = (new Scanner(System.in)).nextLine();
         System.out.println("Nhap so dien thoai nha cung cap: ");
-        this.sdtncc = (new Scanner(System.in)).nextInt();
+        this.sdtncc = (new Scanner(System.in)).nextLine();
         System.out.println("Nhap email nha cung cap: ");
         this.emailncc = (new Scanner(System.in)).nextLine();
     }
     public void xuat() {
-        System.out.format("| %-8s | %-25s | %-25s | %-15s | %-20s", "Nha cung cap: " + 
+        System.out.format("| %-8s | %-25s | %-25s | %-20s | %-20s" , 
                 MaNhaCungCap, TenNhaCungCap, DiaChi, sdtncc, emailncc);
+    }
+    public static void main(String[] args) {
+        NhaCungCap ncc=new NhaCungCap();
+        ncc.nhap();
+        ncc.xuat();
     }
 }

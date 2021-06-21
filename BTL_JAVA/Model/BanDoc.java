@@ -1,7 +1,16 @@
-package BTL_JAVA.Model;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author BENH VIEN CONG NGHE
+ */
 public class BanDoc extends Nguoi{
     private String tenLop;
     Scanner sc= new Scanner(System.in);
@@ -30,5 +39,10 @@ public class BanDoc extends Nguoi{
     public void xuat() {
         super.xuat();
         System.out.format("| %-8s |",""+ tenLop);
+    }
+    public static void main(String[] args) {
+        BanDoc bd=new BanDoc();
+        bd.nhap();
+        bd.xuat();
     }
 }

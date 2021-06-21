@@ -1,7 +1,16 @@
-package BTL_JAVA.Model;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author BENH VIEN CONG NGHE
+ */
 public class HoaDon {
     private int MaHoaDon;
     private int SoLuongSach;
@@ -118,5 +127,10 @@ public class HoaDon {
     public void xuat() {
         System.out.format("| %-8s | %-3s | %-5s | %-8s | %-8s | %-5s | %-5s", "Hoa Don: " + 
                 MaHoaDon, SoLuongSach, TongSoTien, MaThuThu, MaBanDoc, NgayMuon, NgayTra);
+    }
+    public static void main(String[] args) {
+        HoaDon hd =new HoaDon();
+        hd.nhap();
+        hd.xuat();
     }
 }
