@@ -131,7 +131,9 @@ public class Sach implements Serializable{
         
     }
     public void xuat(){
-         System.out.format("| %20s | %20s | %20s | %20s | %20s | %20s | %20s | %20s | %20s \n ", maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap, soLuongTong, soLuongCon,giaSach);
+         System.out.format("| %-10s | %-22s | %-25s | %-20s | %-15s | %-15s | %-10s | %-14s | %-15s |\n", 
+                 "S" + maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap, soLuongTong, 
+                 soLuongCon,giaSach);
     }
     
 }

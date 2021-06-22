@@ -7,6 +7,7 @@ package BTL_JAVA.Controller;
 
 import BTL_JAVA.Model.Sach;
 import BTL_JAVA.DAO.SachDAO;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,49 +15,97 @@ import java.util.List;
  * @author Laptopkhanhtran.vn
  */
 public class SachManager {
+
     private List<Sach> list;
     private SachDAO sachDao;
 
     public SachManager() {
-        sachDao=new SachDAO();
-        list=sachDao.read();
+        sachDao = new SachDAO();
+        list = sachDao.read();
     }
-    public boolean them(){
-       int ma=(list.size()>0) ? (list.get(list.size()-1).getMaSach() + 1) : 1;
-       Sach s=new Sach();
-       s.nhap();
-       s.setMaSach(ma);
-       list.add(s);
-       return sachDao.write(list,true);
+
+    public boolean them() {
+        int ma = (list.size() > 0) ? (list.get(list.size() - 1).getMaSach() + 1) : 1;
+        Sach s = new Sach();
+        s.nhap();
+        s.setMaSach(ma);
+        list.add(s);
+        return sachDao.write(list, true);
     }
-    public boolean sua(Sach s, int maSach){
-       for(int i=0;i<list.size();i++){
-          if(list.get(i).getMaSach()==maSach){
-             list.set(i, s);
-             return sachDao.write(list,true);
-          }
-       }
-       return false;
+
+    public boolean sua(Sach s, int maSach) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getMaSach() == maSach) {
+                list.set(i, s);
+                return sachDao.write(list, true);
+            }
+        }
+        return false;
     }
-    public boolean xoa(int maSach){
-       for(int i=0;i<list.size();i++){
-         if(list.get(i).getMaSach()==maSach){
-            list.remove(i);
-            return sachDao.write(list, true);
-         }
-       }
-       return false;
+
+    public boolean xoa(int maSach) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getMaSach() == maSach) {
+                list.remove(i);
+                return sachDao.write(list, true);
+            }
+        }
+        return false;
     }
-    public static void main(String[] args) {
-        SachManager sm=new SachManager();
-        //sm.them();
-        sm.sua(new Sach(1, "Cha giau cha ngheo", "Thay khanh", "Trang an", "21/06/2021", 100, 50,"Tai lieu", 100000), 2);
-        sm.xoa(001);
-        SachDAO sDao=new SachDAO();
-        List<Sach> list=sDao.read();
-        for (Sach sach : list) {
-            sach.xuat();
+
+    public int tim(int maSach, List<Sach> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getMaSach() == maSach) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public List<Sach> getList() {
+        return list;
+    }
+
+    public void xemDanhSach() {
+        System.out.format("| %-10s | %-22s | %-25s | %-20s | %-15s | %-15s | %-10s | %-14s | %-15s |\n",
+                "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập",
+                "Số lượng", "Số lượng còn", "Giá sách");
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).xuat();
         }
     }
     
+    public int kiemTraSoLuong(int index) {
+        if(index <= 0) return -1;
+        if(index > list.get(index).getSoLuongCon()) return list.get(index).getSoLuongCon();
+        return 1;
+    }
+    
+    public int kiemTraTrungTen(Sach sach) {
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).getTenSach().equals(sach.getTenSach())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+
+    public static void main(String[] args) {
+//        SachManager sm = new SachManager();
+//        sm.them();
+//        //sm.sua(new Sach(1, "Cha giau cha ngheo", "Thay khanh", "Trang an", "21/06/2021", 100, 50,"Tai lieu", 100000), 2);
+//        //sm.xoa(001);
+//        SachDAO sDao = new SachDAO();
+//        List<Sach> list = sDao.read();
+//        for (Sach sach : list) {
+//            sach.xuat();
+//        }
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(1);
+        list.remove(0);
+        list.add(1, 0);
+    }
+
 }
