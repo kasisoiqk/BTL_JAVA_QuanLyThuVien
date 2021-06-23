@@ -1,66 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BTL_JAVA.Model;
 
 import java.io.Serializable;
 import java.util.Scanner;
 
-/**
- *
- * @author Dell
- */
 public class ChiTietHoaDon implements Serializable{
-    private static final long serialVersionUID = -1892561327013038124L;
-    private int maHd;// mã hóa đơn
-    private int maScah;//ma sach;
-    private int GiaSach;
+    private int maHD;
+    private int maSach;
+    private int gia;
 
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(int maHd, int maScah, int GiaSach) {
-        this.maHd = maHd;
-        this.maScah = maScah;
-        this.GiaSach = GiaSach;
+    public ChiTietHoaDon(int maHD, int maSach, int gia) {
+        this.maHD = maHD;
+        this.maSach = maSach;
+        this.gia = gia;
     }
 
-    public int getMaHd() {
-        return maHd;
+    public int getMaHD() {
+        return maHD;
     }
 
-    public void setMaHd(int maHd) {
-        this.maHd = maHd;
+    public void setMaHD(int maHD) {
+        this.maHD = maHD;
     }
 
-    public int getMaScah() {
-        return maScah;
+    public int getMaSach() {
+        return maSach;
     }
 
-    public void setMaScah(int maScah) {
-        this.maScah = maScah;
+    public void setMaSach(int maSach) {
+        this.maSach = maSach;
     }
 
-    public int getGiaSach() {
-        return GiaSach;
+    public int getGia() {
+        return gia;
     }
 
-    public void setGiaSach(int GiaSach) {
-        this.GiaSach = GiaSach;
+    public void setGia(int gia) {
+        this.gia = gia;
     }
-
-   
-    public void Nhap(){
-        System.out.println("Nhap ma hoa don:");
-        this.maHd = (new Scanner(System.in)).nextInt();
-        System.out.println("Nhap ma sach:");
-        this.maScah = (new Scanner(System.in)).nextInt();
-        System.out.println("Nhap ma gia sach:");
-        this.GiaSach = (new Scanner(System.in)).nextInt();
+    
+    public void nhap() {
+        System.out.print("Nhập mã hóa đơn: ");
+        maHD = (new Scanner(System.in)).nextInt();
+        System.out.print("Nhập mã sách: ");
+        maSach = (new Scanner(System.in)).nextInt();
+        System.out.print("Nhập giá: ");
+        gia = (new Scanner(System.in)).nextInt();
     }
+    
     public void xuat() {
-       System.out.format("|%-8d|%-8d|%-8d",maHd,maScah,GiaSach);
+        System.out.format("| %-8s | %-8s | %-15s |\n", "HD"+maHD, "S"+maSach, gia);
     }
 }

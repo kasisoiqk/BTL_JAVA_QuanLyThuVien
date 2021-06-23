@@ -2,10 +2,9 @@ package BTL_JAVA.DAO;
 
 import BTL_JAVA.DAO.DataReadWriteObject;
 import BTL_JAVA.Model.ThuThu;
-import java.io.Serializable;
 import java.util.List;
 
-public class ThuThuDAO implements Serializable{
+public class ThuThuDAO {
     
     private static final String thuThu_FILE_NAME = "thuthu.txt";
     private static DataReadWriteObject<ThuThu> data = new DataReadWriteObject<>(thuThu_FILE_NAME);

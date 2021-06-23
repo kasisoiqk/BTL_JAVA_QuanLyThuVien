@@ -69,27 +69,27 @@ public class Nguoi implements Serializable{
     }
 
     public void nhap() {
-        System.out.println("Nhap ho va ten: ");
+        System.out.print("Nhập họ và tên: ");
         this.ten = (new Scanner(System.in)).nextLine();
-        System.out.println("Nhap ngay sinh: ");
+        System.out.print("Nhập ngày sinh: ");
         this.ngaySinh.setNgay((new Scanner(System.in)).nextInt());
-        System.out.println("Nhap thang sinh: ");
+        System.out.print("Nhập tháng sinh: ");
         this.ngaySinh.setThang((new Scanner(System.in)).nextInt());
-        System.out.println("Nhap nam sinh: ");
+        System.out.print("Nhập năm sinh: ");
         this.ngaySinh.setNam((new Scanner(System.in)).nextInt());
-        System.out.println("Nhap gioi tinh: 1. Nam - 0. Nu");
+        System.out.print("Nhập giới tính: 1. Nam - 0. Nữ : ");
         int x = (new Scanner(System.in)).nextInt();
         if(x == 1) this.gioiTinh = "Nam";
-        else this.gioiTinh = "Nu";
-        System.out.println("Nhap so dien thoai: ");
+        else this.gioiTinh = "Nữ";
+        System.out.print("Nhập số điện thoại: ");
         this.sdt = (new Scanner(System.in)).nextLine();
-        System.out.println("Nhap email: ");
+        System.out.print("Nhập email: ");
         this.email = (new Scanner(System.in)).nextLine();
     }
         
     public void xuat() {
-        System.out.format("| %-8s | %-25s | %-10s | %-8s | %-15s | %-20s", "PS" + 
-                ma, ten, ngaySinh, gioiTinh, sdt, email);
+        System.out.format(" | %-25s | %-10s | %-10s | %-15s | %-25s",
+                ten, ngaySinh, gioiTinh, sdt, email);
     }
     
 }

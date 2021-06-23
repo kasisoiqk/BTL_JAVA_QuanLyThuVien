@@ -2,10 +2,9 @@ package BTL_JAVA.DAO;
 
 import BTL_JAVA.DAO.DataReadWriteObject;
 import BTL_JAVA.Model.HoaDon;
-import java.io.Serializable;
 import java.util.List;
 
-public class HoaDonDao implements Serializable{
+public class HoaDonDAO {
     
     private static final String HoaDon_FILE_NAME = "hoadon.txt";
     private static DataReadWriteObject<HoaDon> data = new DataReadWriteObject<>(HoaDon_FILE_NAME);

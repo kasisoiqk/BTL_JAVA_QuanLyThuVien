@@ -1,7 +1,7 @@
 package BTL_JAVA.View;
 
-import BTL_JAVA.Controller.SachManager;
-import BTL_JAVA.Model.Sach;
+import BTL_JAVA.Controller.*;
+import BTL_JAVA.Model.*;
 import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +47,16 @@ public class GiaoDienQuanLyMuonTraSach {
         }
     }
 
+    public void inThongTinBanDoc(BanDoc banDoc) {
+        if (banDoc == null) {
+            System.out.println("Thông tin bạn đọc trống!");
+        } else {
+            System.out.format("| %-8s | %-25s | %-10s | %-10s | %-15s | %-25s | %-15s |\n",
+                    "Mã", "Họ và tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Lớp");
+            banDoc.xuat();
+        }
+    }
+
     public String checkInputMaSach(String ma, List<Sach> list) {
         String[] s = ma.split("S");
 
@@ -79,6 +89,11 @@ public class GiaoDienQuanLyMuonTraSach {
         GiaoDienQuanLyMuonTraSach gd = new GiaoDienQuanLyMuonTraSach(1);
         List<Sach> danhmucHD = new ArrayList<>();
         List<Integer> quantities = new ArrayList<>();
+        BanDoc banDoc = null;
+        HoaDonManager hoaDonMn = new HoaDonManager();
+        HoaDon hoaDon;
+        ChiTietHoaDonManager chiTietHdMn = new ChiTietHoaDonManager();
+
         boolean isRun = true;
 
         while (isRun) {
@@ -89,24 +104,21 @@ public class GiaoDienQuanLyMuonTraSach {
             System.out.println(" *              2. Sửa thông tin sách trong hóa đơn        * ");
             System.out.println(" *              3. Xóa sách trong hóa đơn                  * ");
             System.out.println(" *              4. Nhập thông tin bạn đọc                  * ");
-            System.out.println(" *              5. Sửa thông tin bạn đọc                  * ");
-            System.out.println(" *              6. Thanh toán                              * ");
-            System.out.println(" *              7. Xem danh sách                           * ");
+            System.out.println(" *              5. Thanh toán                              * ");
+            System.out.println(" *              6. Xem danh sách                           * ");
             System.out.println(" *              0. Quay lại                                * ");
             System.out.println(" *********************************************************** ");
 
-//            danhmucHD.add(new Sach(1, "a", "A", "A", "1/1/1001", 5, 4, "A", 3000));
-//            danhmucHD.add(new Sach(2, "a", "A", "A", "1/1/1001", 5, 4, "A", 3000));
-//            quantity.add(3);
-//            quantity.add(4);
             System.out.println("");
             gd.inDanhMucHD(danhmucHD, quantities);
+            System.out.println("");
+            gd.inThongTinBanDoc(banDoc);
             System.out.println("");
 
             System.out.print("Mời bạn chọn chức năng: ");
 
             int key = Integer.parseInt((new Scanner(System.in)).nextLine());
-            while (key < 0 || key > 7) {
+            while (key < 0 || key > 6) {
                 System.out.print("Yêu cầu nhập lại chức năng: ");
                 key = Integer.parseInt((new Scanner(System.in)).nextLine());
             }
@@ -114,50 +126,99 @@ public class GiaoDienQuanLyMuonTraSach {
             int index;
             String ma;
             int quantity;
+            Date ngayMuon, ngayTra;
+            List<ChiTietHoaDon> chiTietHoaDons = new ArrayList<>();
 
             switch (key) {
                 case 1:
-                    System.out.print("Bạn lựa chọn thêm sách mới vào hóa đơn!");
+                    System.out.println("Bạn lựa chọn thêm sách mới vào hóa đơn!");
                     System.out.print("Nhập mã sách: ");
                     ma = (new Scanner(System.in)).nextLine();
                     ma = checkInputMaSach(ma, sachMn.getList());
-                    if(ma.equals("huy")) break;
+                    if (ma.equals("huy")) {
+                        break;
+                    }
                     System.out.print("Nhập số lượng sách: ");
                     quantity = (new Scanner(System.in)).nextInt();
                     danhmucHD.add(sachMn.getList().get(Integer.parseInt(ma)));
                     quantities.add(quantity);
                     break;
                 case 2:
-                    System.out.print("Bạn lựa chọn sửa thông tin sách trong hóa đơn!");
+                    System.out.println("Bạn lựa chọn sửa thông tin sách trong hóa đơn!");
                     System.out.print("Nhập mã sách muốn sửa: ");
                     ma = (new Scanner(System.in)).nextLine();
                     ma = checkInputMaSach(ma, danhmucHD);
-                    if(ma.equals("huy")) break;
+                    if (ma.equals("huy")) {
+                        break;
+                    }
                     System.out.print("Nhập số lượng sách sửa: ");
                     quantity = (new Scanner(System.in)).nextInt();
                     index = Integer.parseInt(ma);
                     quantities.set(index, quantity);
                     break;
                 case 3:
-                    System.out.print("Bạn lựa chọn xóa thông tin sách trong hóa đơn!");
+                    System.out.println("Bạn lựa chọn xóa thông tin sách trong hóa đơn!");
                     System.out.print("Nhập mã sách muốn xóa: ");
                     ma = (new Scanner(System.in)).nextLine();
                     ma = checkInputMaSach(ma, danhmucHD);
-                    if(ma.equals("huy")) break;
+                    if (ma.equals("huy")) {
+                        break;
+                    }
                     index = Integer.parseInt(ma);
                     danhmucHD.remove(index);
                     quantities.remove(index);
                     break;
                 case 4:
-
+                    System.out.println("Bạn lựa chọn nhập thông tin bạn đọc!");
+                    System.out.println("Nhập thông tin bạn đọc: ");
+                    banDoc = new BanDoc();
+                    System.out.print("Nhập mã bạn đọc: ");
+                    banDoc.setMa((new Scanner(System.in)).nextInt());
+                    banDoc.nhap();
                     break;
                 case 5:
-
+                    if (danhmucHD.size() <= 0 || banDoc == null) {
+                        System.out.println("Vui lòng nhập đầy đủ thông tin!");
+                    } else {
+                        System.out.println("Bạn có chắc chắn muốn thanh toán không?");
+                        System.out.print("Bấm 'yes' để xác nhận, bấm bất kỳ khác để hủy: ");
+                        ma = (new Scanner(System.in)).nextLine();
+                        if (!ma.equals("yes")) {
+                            break;
+                        }
+                        // Them vao hoa don
+                        int sum = 0,
+                                totalMoney = 0;
+                        for (int i = 0; i < danhmucHD.size(); i++) {
+                            sum += quantities.get(i);
+                            totalMoney += danhmucHD.get(i).getGiaSach() * quantities.get(i);
+                        }
+                        ngayMuon = new Date();
+                        System.out.print("Nhập ngày mượn: ");
+                        ngayMuon.setNgay((new Scanner(System.in)).nextInt());
+                        System.out.print("Nhập tháng mượn: ");
+                        ngayMuon.setThang((new Scanner(System.in)).nextInt());
+                        System.out.print("Nhập năm mượn: ");
+                        ngayMuon.setNam((new Scanner(System.in)).nextInt());
+                        ngayTra = new Date();
+                        System.out.print("Nhập ngày trả: ");
+                        ngayTra.setNgay((new Scanner(System.in)).nextInt());
+                        System.out.print("Nhập tháng trả: ");
+                        ngayTra.setThang((new Scanner(System.in)).nextInt());
+                        System.out.print("Nhập năm trả: ");
+                        ngayTra.setNam((new Scanner(System.in)).nextInt());
+                        hoaDon = new HoaDon(-1, sum, totalMoney, banDoc.getMa(), maThuThu, ngayMuon, ngayTra);
+                        hoaDonMn.them(hoaDon);
+                        index = hoaDonMn.timMaHoaDon(hoaDon);
+                        for (int i = 0; i < danhmucHD.size(); i++) {
+                            chiTietHoaDons.add(new ChiTietHoaDon(index, danhmucHD.get(i).getMaSach(), danhmucHD.get(i).getGiaSach()));
+                            chiTietHdMn.them(chiTietHoaDons.get(i));
+                        }
+                    }
+                    System.out.print("Thanh toán thành công! Nhấn phím bất kỳ để tiếp tục! ");
+                    ma = (new Scanner(System.in)).nextLine();
                     break;
                 case 6:
-
-                    break;
-                case 7:
                     System.out.println("\nDanh sách sách có trong thư viện:");
                     sachMn.xemDanhSach();
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
@@ -172,6 +233,52 @@ public class GiaoDienQuanLyMuonTraSach {
         }
     }
 
+    public void xemHoaDonMuonSach() {
+        HoaDonManager hoaDonMn = new HoaDonManager();
+        List<HoaDon> listHoaDon = hoaDonMn.getList();
+        ChiTietHoaDonManager chiTietMn = new ChiTietHoaDonManager();
+        List<ChiTietHoaDon> listChiTiet = chiTietMn.getList();
+        boolean isRun = true;
+        System.out.println("Bạn chọn xem danh sách hóa đơn mượn sách!");
+
+        while (isRun) {
+            System.out.format("| %-5s | %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s |\n",
+                    "STT", "Mã HD", "Só lượng", "Tổng tiền", "Mã thủ thư", "Mã bạn đọc", "Ngày mượn", "Ngày trả");
+            for (int i = 0; i < listHoaDon.size(); i++) {
+                System.out.format("| %-5s | %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s |\n",
+                        i + 1, "HD" + listHoaDon.get(i).getMaHoaDon(), listHoaDon.get(i).getSoLuongSach(), listHoaDon.get(i).getTongSoTien(),
+                        "TT" + listHoaDon.get(i).getMaThuThu(), "SV" + listHoaDon.get(i).getMaBanDoc(), listHoaDon.get(i).getNgayMuon(), listHoaDon.get(i).getNgayTra());
+            }
+            System.out.print("\nNhập số thứ tự của hóa đơn để xem chi tiết hóa đơn: ");
+            int key = (new Scanner(System.in)).nextInt();
+
+            while (key <= 0 || key > listHoaDon.size()) {
+                System.out.print("\nBạn nhập số thứ tự vượt quá hoặc không hợp lệ."
+                        + "\nYêu cầu nhập lại (hoặc bấm '-1' để quay lại): ");
+                key = (new Scanner(System.in)).nextInt();
+                if(key == -1) break;
+            }
+            
+            if(key == -1) break;
+
+            System.out.println("");
+
+            System.out.format("| %-5s | %-8s | %-8s | %-15s |\n", "STT", "Mã HD", "Mã sách", "Giá");
+            int j = 1;
+            for (int i = 0; i < listChiTiet.size(); i++) {
+                if (listChiTiet.get(i).getMaHD() == listHoaDon.get(key - 1).getMaHoaDon()) {
+                    System.out.format("| %-5s | %-8s | %-8s | %-15s |\n", 
+                        j, "HD"+listChiTiet.get(i).getMaHD(), "S" + listChiTiet.get(i).getMaSach(), listChiTiet.get(i).getGia());
+                    j++;
+                }
+            }
+            System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+            String s = (new Scanner(System.in)).nextLine();
+            clearScreen();
+        }
+        clearScreen();
+    }
+
     public static void main(String[] args) {
         GiaoDienQuanLyMuonTraSach gd = new GiaoDienQuanLyMuonTraSach(1);
         boolean isRun = true;
@@ -182,7 +289,7 @@ public class GiaoDienQuanLyMuonTraSach {
             System.out.println(" *********************************************************** ");
             System.out.println(" *                     1. Mượn sách                        * ");
             System.out.println(" *                     2. Trả sách                         * ");
-            System.out.println(" *                     3. Xem hóa đơn mượn trả             * ");
+            System.out.println(" *                     3. Xem hóa đơn mượn sách             * ");
             System.out.println(" *                     0. Quay lại                         * ");
             System.out.println(" *********************************************************** ");
             System.out.print("Mời bạn chọn chức năng: ");
@@ -203,6 +310,7 @@ public class GiaoDienQuanLyMuonTraSach {
                     break;
                 case 3:
                     clearScreen();
+                    gd.xemHoaDonMuonSach();
                     break;
                 case 0:
                     isRun = false;

@@ -1,6 +1,5 @@
 package BTL_JAVA.Controller;
 
-import BTL_JAVA.DAO.DataReadWriteObject;
 import BTL_JAVA.DAO.QuanTriDAO;
 import BTL_JAVA.Model.Date;
 import BTL_JAVA.Model.QuanTri;
@@ -50,12 +49,12 @@ public class QuanTriManager {
     public static void main(String[] args) {
         QuanTriManager qtMn = new QuanTriManager();
 
-        //qtMn.them();
-        if (qtMn.sua(new QuanTri(2, "Linh", new Date(1, 1, 1), "Nu", "1", "1", 0), 2)) {
-            System.out.println("A");
-        }
-        
-        qtMn.xoa(3);
+        qtMn.them();
+//        if (qtMn.sua(new QuanTri(2, "Linh", new Date(1, 1, 1), "Nu", "1", "1", 0), 2)) {
+//            System.out.println("A");
+//        }
+//        
+//        qtMn.xoa(3);
 
         QuanTriDAO quan = new QuanTriDAO();
         List<QuanTri> list = quan.read();

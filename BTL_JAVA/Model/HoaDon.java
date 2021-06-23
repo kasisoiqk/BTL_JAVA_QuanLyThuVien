@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BTL_JAVA.Model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-/**
- *
- * @author BENH VIEN CONG NGHE
- */
-public class HoaDon {
+public class HoaDon implements Serializable{
     private int MaHoaDon;
     private int SoLuongSach;
     private int TongSoTien;
@@ -19,7 +11,6 @@ public class HoaDon {
     private int MaThuThu;
     private Date NgayMuon;
     private Date NgayTra;
-    Scanner sc= new Scanner(System.in);
 
     public HoaDon() {
         NgayMuon = new Date();
@@ -91,14 +82,6 @@ public class HoaDon {
     public void setNgayTra(Date NgayTra) {
         this.NgayTra = NgayTra;
     }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
-    }
     public void nhap()
     {
         System.out.println("Nhap ma hoa don: ");
@@ -125,7 +108,7 @@ public class HoaDon {
         this.NgayTra.setNam((new Scanner(System.in)).nextInt());
     }
     public void xuat() {
-        System.out.format("| %-8s | %-3s | %-5s | %-8s | %-8s | %-5s | %-5s", "Hoa Don: " + 
+        System.out.format("| %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s |\n", "HD" + 
                 MaHoaDon, SoLuongSach, TongSoTien, MaThuThu, MaBanDoc, NgayMuon, NgayTra);
     }
     public static void main(String[] args) {

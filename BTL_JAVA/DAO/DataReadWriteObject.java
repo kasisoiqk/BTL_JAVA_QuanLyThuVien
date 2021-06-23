@@ -45,7 +45,6 @@ public class DataReadWriteObject<T> implements Serializable {
                     }
                 }
             }
-            return list;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

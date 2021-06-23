@@ -1,39 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BTL_JAVA.Controller;
 
-import BTL_JAVA.DAO.ChiTietHoaDonDao;
+import BTL_JAVA.DAO.ChiTietHoaDonDAO;
 import BTL_JAVA.Model.ChiTietHoaDon;
-import java.io.Serializable;
+import BTL_JAVA.Model.HoaDon;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 public class ChiTietHoaDonManager {
     private List<ChiTietHoaDon> list ;
-    private ChiTietHoaDonDao cthoadon;
+    private ChiTietHoaDonDAO cthoadon;
     
     public ChiTietHoaDonManager() {
-        cthoadon = new ChiTietHoaDonDao();
+        cthoadon = new ChiTietHoaDonDAO();
         list = cthoadon.read();
     }
     public boolean them() {
-        int maHd = (list.size() > 0) ? (list.get(list.size() - 1).getMaHd() + 1) : 1;
+        int maHd = (list.size() > 0) ? (list.get(list.size() - 1).getMaHD() + 1) : 1;
         ChiTietHoaDon hd = new ChiTietHoaDon();
-        hd.Nhap();
-        hd.setMaHd(maHd);
+        hd.nhap();
+        hd.setMaHD(maHd);
+        list.add(hd);
 
-        return cthoadon.write(hd);
+        return cthoadon.write(list, true);
+    }
+    
+    public boolean them(ChiTietHoaDon chiTietHoaDon) {
+        //int maHd = (list.size() > 0) ? (list.get(list.size() - 1).getMaHD() + 1) : 1;
+        //chiTietHoaDon.setMaHD(maHd);
+        list.add(chiTietHoaDon);
+
+        return cthoadon.write(list, true);
     }
     
     public boolean sua(ChiTietHoaDon hoadon, int maHd) {
         for(ChiTietHoaDon hd : list) {
-            if(hd.getMaHd() == maHd) {
+            if(hd.getMaHD() == maHd) {
                 hd = hoadon;
                 return cthoadon.write(list, true);
             }
@@ -43,18 +43,23 @@ public class ChiTietHoaDonManager {
     
     public boolean xoa(int maHd) {
         for(ChiTietHoaDon hd : list) {
-            if(hd.getMaHd() == maHd) {
+            if(hd.getMaHD() == maHd) {
                 list.remove(hd);
                 return cthoadon.write(list, true);
             }
         }
         return false;
     } 
+    
+    public List<ChiTietHoaDon> getList() {
+        return list;
+    }
+    
     public static void main(String[] args) {
         ChiTietHoaDonManager hdMn = new ChiTietHoaDonManager();
-        hdMn.them();
+        //hdMn.them(new ChiTietHoaDon(0, 0, 0));
         
-        ChiTietHoaDonDao dao = new ChiTietHoaDonDao();
+        ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO();
         List<ChiTietHoaDon> list = dao.read();
         for(ChiTietHoaDon hd : list){
             hd.xuat();

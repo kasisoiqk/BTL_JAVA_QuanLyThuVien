@@ -2,9 +2,7 @@ package BTL_JAVA.Controller;
 
 import BTL_JAVA.Model.ThuThu;
 import BTL_JAVA.DAO.ThuThuDAO;
-import java.io.Serializable;
 import java.util.List;
-import java.util.Scanner;
 
 public class ThuThuManager {
     private List<ThuThu> list;
@@ -20,8 +18,9 @@ public class ThuThuManager {
         ThuThu tt = new ThuThu();
         tt.nhap();
         tt.setMa(ma);
+        list.add(tt);
 
-        return thuThuDAO.write(tt);
+        return thuThuDAO.write(list, true);
     }
     
     public boolean sua(ThuThu thuthu, int ma) {
