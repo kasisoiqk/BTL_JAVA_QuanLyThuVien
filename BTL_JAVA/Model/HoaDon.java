@@ -11,13 +11,14 @@ public class HoaDon implements Serializable{
     private int MaThuThu;
     private Date NgayMuon;
     private Date NgayTra;
+    private String Status;
 
     public HoaDon() {
         NgayMuon = new Date();
         NgayTra = new Date();
     }
 
-    public HoaDon(int MaHoaDon, int SoLuongSach, int TongSoTien, int MaBanDoc, int MaThuThu, Date NgayMuon, Date NgayTra) {
+    public HoaDon(int MaHoaDon, int SoLuongSach, int TongSoTien, int MaBanDoc, int MaThuThu, Date NgayMuon, Date NgayTra, String Status) {
         this.MaHoaDon = MaHoaDon;
         this.SoLuongSach = SoLuongSach;
         this.TongSoTien = TongSoTien;
@@ -25,6 +26,7 @@ public class HoaDon implements Serializable{
         this.MaThuThu = MaThuThu;
         this.NgayMuon = NgayMuon;
         this.NgayTra = NgayTra;
+        this.Status = Status;
     }
     
     public int getMaHoaDon() {
@@ -82,6 +84,16 @@ public class HoaDon implements Serializable{
     public void setNgayTra(Date NgayTra) {
         this.NgayTra = NgayTra;
     }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
+    
+    
     public void nhap()
     {
         System.out.println("Nhap ma hoa don: ");
@@ -108,8 +120,8 @@ public class HoaDon implements Serializable{
         this.NgayTra.setNam((new Scanner(System.in)).nextInt());
     }
     public void xuat() {
-        System.out.format("| %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s |\n", "HD" + 
-                MaHoaDon, SoLuongSach, TongSoTien, MaThuThu, MaBanDoc, NgayMuon, NgayTra);
+        System.out.format("| %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s | %-10s |\n", "HD" + 
+                MaHoaDon, SoLuongSach, TongSoTien, MaThuThu, MaBanDoc, NgayMuon, NgayTra, Status);
     }
     public static void main(String[] args) {
         HoaDon hd =new HoaDon();

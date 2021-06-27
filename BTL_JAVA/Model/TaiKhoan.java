@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Dell
  */
-public class TaiKhoan implements Serializable{
+public class TaiKhoan implements Serializable, Comparable<TaiKhoan>{
     private int maTk;
     private String TenDangNhap;
     private String matKhau;
@@ -59,22 +59,32 @@ public class TaiKhoan implements Serializable{
     public void setPhanQuyen(String PhanQuyen) {
         this.PhanQuyen = PhanQuyen;
     }
-    public void Nhap(){
-        System.out.println("Nhap ma tai khoan ");
-        this.maTk=(new Scanner(System.in)).nextInt();
-        System.out.println("Nhap ten dang nhap: ");
+    public void nhap(){
+        System.out.print("Nhập tên đăng nhập: ");
         this.TenDangNhap = (new Scanner(System.in)).nextLine();
-        System.out.println("Nhap mat khau dang nhap: ");
+        System.out.print("Nhập mật khẩu: ");
         this.matKhau = (new Scanner(System.in)).nextLine();
-        System.out.println("Nhap loai tai khoan 0.Quan ly ,1.Quan tri ");
+        System.out.print("Nhập loại tài khoản: 0. Thủ thư - 1. Quản trị : ");
         int x = (new Scanner(System.in)).nextInt();
         if (x==0) {
-            this.PhanQuyen = "Quan ly";
+            this.PhanQuyen = "Thu thu";
         }
         else
             this.PhanQuyen = "Quan tri";
     }
-    public void Xuat(){
-         System.out.format("|%-8d|%-12s|%-12s|%10s",maTk,TenDangNhap,matKhau,PhanQuyen);
+    public void xuat(){
+         System.out.format("| %-8s | %-20s | %-20s | %-15s |\n","TK"+maTk,TenDangNhap,matKhau,PhanQuyen);
+    }
+    
+    @Override
+    public int compareTo(TaiKhoan o) {
+        int i = this.getTenDangNhap().compareTo(o.getTenDangNhap());
+        if (i > 0) {
+            return 1;
+        } else if ( i < 0) {
+            return -1;            
+        }else{
+            return 0;
+        }
     }
 }

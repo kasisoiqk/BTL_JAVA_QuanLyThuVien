@@ -4,8 +4,8 @@ import BTL_JAVA.Model.BanDoc;
 import java.util.List;
 
 public class BanDocDAO {
-    private static final String QUANTRI_FILE_NAME = "quantri.txt";
-    private static DataReadWriteObject<BanDoc> data = new DataReadWriteObject<>(QUANTRI_FILE_NAME);
+    private static final String BANDOC_FILE_NAME = "bandoc.txt";
+    private static DataReadWriteObject<BanDoc> data = new DataReadWriteObject<>(BANDOC_FILE_NAME);
 
     public boolean write(List<BanDoc> list, boolean isNewFile) {
         return this.data.writeFile(list, isNewFile);

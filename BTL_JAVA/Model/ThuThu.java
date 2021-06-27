@@ -37,16 +37,17 @@ public class ThuThu extends Nguoi implements  Serializable{
     @Override
     public void nhap() {
         super.nhap();
-        System.out.println("Nhap ma tai khoan:");
+        System.out.print("Nhập mã tài khoản: ");
         this.maTk = (new Scanner(System.in)).nextInt();
-        System.out.println("Nhap Chuc vu:");
+        System.out.print("Nhập chức vụ: ");
         this.chucVu = (new Scanner(System.in)).nextLine();
     }
     
     @Override
     public void xuat() {
+        System.out.format("| %-8s", "TT"+getMa());
         super.xuat();
-        
+        System.out.format(" | %-8s | %-25s |\n",maTk,chucVu);
     }
     
 }

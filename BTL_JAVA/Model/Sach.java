@@ -19,21 +19,19 @@ public class Sach implements Serializable{
     private String nhaCungCap;
     private String ngayNhap;
     private int soLuongTong;
-    private int soLuongCon;
     private String theLoai;
     private int giaSach;
 
     public Sach() {
     }
 
-    public Sach(int maSach, String tenSach, String tacGia, String nhaCungCap, String ngayNhap, int soLuongTong, int soLuongCon, String theLoai, int giaSach) {
+    public Sach(int maSach, String tenSach, String tacGia, String nhaCungCap, String ngayNhap, int soLuongTong, String theLoai, int giaSach) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
         this.nhaCungCap = nhaCungCap;
         this.ngayNhap = ngayNhap;
         this.soLuongTong = soLuongTong;
-        this.soLuongCon = soLuongCon;
         this.theLoai = theLoai;
         this.giaSach = giaSach;
     }
@@ -86,14 +84,6 @@ public class Sach implements Serializable{
         this.soLuongTong = soLuongTong;
     }
 
-    public int getSoLuongCon() {
-        return soLuongCon;
-    }
-
-    public void setSoLuongCon(int soLuongCon) {
-        this.soLuongCon = soLuongCon;
-    }
-
     public String getTheLoai() {
         return theLoai;
     }
@@ -124,16 +114,19 @@ public class Sach implements Serializable{
         ngayNhap=new Scanner(System.in).nextLine();
         System.out.print("Nhập số lượng tổng: ");
         soLuongTong=new Scanner(System.in).nextInt();
-        System.out.print("Nhập số lượng còn lại: ");
-        soLuongCon=new Scanner(System.in).nextInt();
         System.out.print("Nhập giá sách: ");
         giaSach=new Scanner(System.in).nextInt();
         
     }
     public void xuat(){
-         System.out.format("| %-10s | %-22s | %-25s | %-20s | %-15s | %-15s | %-10s | %-14s | %-15s |\n", 
+         System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |\n", 
                  "S" + maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap, soLuongTong, 
-                 soLuongCon,giaSach);
+                 giaSach);
+    }
+    public void xuat(boolean abc){
+         System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-15s |\n", 
+                 "S" + maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap, 
+                 giaSach);
     }
     
 }

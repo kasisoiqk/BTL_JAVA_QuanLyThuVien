@@ -3,7 +3,8 @@ package BTL_JAVA.Model;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Nguoi implements Serializable{
+public class Nguoi implements Serializable, Comparable<Nguoi>{
+    
     private int ma;
     private String ten;
     private Date ngaySinh;
@@ -90,6 +91,23 @@ public class Nguoi implements Serializable{
     public void xuat() {
         System.out.format(" | %-25s | %-10s | %-10s | %-15s | %-25s",
                 ten, ngaySinh, gioiTinh, sdt, email);
+    }
+    
+//    public void xuat(boolean is) {
+//        System.out.format(" | %-25s | %-10s | %-10s | %-15s | %-25s |\n",
+//                ten, ngaySinh, gioiTinh, sdt, email);
+//    }
+    
+    @Override
+    public int compareTo(Nguoi o) {
+        int i = this.getTen().compareTo(o.getTen());
+        if (i > 0) {
+            return 1;
+        } else if ( i < 0) {
+            return -1;            
+        }else{
+            return 0;
+        }
     }
     
 }
