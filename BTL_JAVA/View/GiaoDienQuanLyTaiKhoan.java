@@ -27,13 +27,14 @@ public class GiaoDienQuanLyTaiKhoan {
                 "Mã TK", "Tên đăng nhập", "Mật khẩu", "Quyền hạn");
     }
 
-    public static void main(String[] args) {
+    public void run() throws InterruptedException {
         GiaoDienQuanLyTaiKhoan menu = new GiaoDienQuanLyTaiKhoan();
         TaiKhoanController Mn = new TaiKhoanController();
         TaiKhoanDao dao = new TaiKhoanDao();
         List<TaiKhoan> list;
         int chon;
         do {
+            Thread.sleep(50);
             list = dao.read();
             menu.Hienthi();
             for (TaiKhoan taiKhoan : list) {
@@ -146,5 +147,9 @@ public class GiaoDienQuanLyTaiKhoan {
             }
         } while (chon != 0);
 
+    }
+    public static void main(String[] args) throws InterruptedException {
+        GiaoDienQuanLyTaiKhoan d = new GiaoDienQuanLyTaiKhoan();
+        d.run();
     }
 }

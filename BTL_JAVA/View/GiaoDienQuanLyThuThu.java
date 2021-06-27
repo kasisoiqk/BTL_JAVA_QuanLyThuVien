@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class GiaoDienQuanLyThuThu implements Serializable {
 
-    public static void clearScreen() {
+    public void clearScreen() {
         try {
             Robot pressbot = new Robot();
             pressbot.keyPress(17); // Holds CTRL key.
@@ -31,13 +31,14 @@ public class GiaoDienQuanLyThuThu implements Serializable {
         System.out.format("| %-8s | %-25s | %-10s | %-10s | %-15s | %-25s | %-8s | %-25s |\n", "Mã", "Họ và tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Mã tk", "Chức vụ");
     }
 
-    public static void main(String[] args) {
+    public void run() throws InterruptedException {
         GiaoDienQuanLyThuThu menu = new GiaoDienQuanLyThuThu();
         ThuThuController Mn = new ThuThuController();
         ThuThuDAO dao = new ThuThuDAO();
         List<ThuThu> list;
         int chon;
         do {
+            Thread.sleep(50);
             list = dao.read();
             menu.Hienthi();
             for (ThuThu thuThu : list) {

@@ -1,17 +1,11 @@
 package BTL_JAVA.View;
 
-import BTL_JAVA.Model.ThuThu;
+import BTL_JAVA.VIEW.GiaoDienQuanLyThuThu;
+import BTL_JAVA.View.GiaoDienQuanLyTaiKhoan;
 import java.awt.Robot;
 import java.util.Scanner;
 
-public class GiaoDienChinhThuThu {
-    
-    private ThuThu tt;
-
-    public GiaoDienChinhThuThu(ThuThu tt) {
-        this.tt = tt;
-    }
-    
+public class GiaoDienChinhQuanTri {
     public void clearScreen() {
         try {
             Robot pressbot = new Robot();
@@ -29,12 +23,11 @@ public class GiaoDienChinhThuThu {
         while(isRun) {
             Thread.sleep(50);
             System.out.println(" *********************************************************** ");
-            System.out.format(" *              - THỦ THƯ : %-18s -           * \n", tt.getTen());
+            System.out.println(" *                 - QUẢN TRỊ HỆ THỐNG -                   * ");
             System.out.println(" *********************************************************** ");
-            System.out.println(" *            1. Quản lý sách trong thư viện               * ");
-            System.out.println(" *            2. Quản lý mượn trả sách                     * ");
-            System.out.println(" *            3. Quản lý danh sách bạn đọc                 * ");
-            System.out.println(" *            0. Đăng xuất                                 * ");
+            System.out.println(" *                1. Quản lý tài khoản                     * ");
+            System.out.println(" *                2. Quản lý thủ thư                       * ");
+            System.out.println(" *                0. Đăng xuất                             * ");
             System.out.println(" *********************************************************** ");
             System.out.print(" Lựa chọn chức năng: ");
             int key = (new Scanner(System.in)).nextInt();
@@ -43,23 +36,16 @@ public class GiaoDienChinhThuThu {
             switch(key) {
                 case 1:
                     clearScreen();
-                    System.out.println("Bạn chọn quản lý sách trong thư viện!");
-                    new GiaoDienQuanLySach().run();
+                    System.out.println("Bạn chọn quản lý tài khoản!");
+                    new GiaoDienQuanLyTaiKhoan().run();
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
                     break;
                 case 2:
                     clearScreen();
-                    System.out.println("Bạn chọn quản lý mượn trả sách!");
-                    new GiaoDienQuanLyMuonTraSach(this.tt.getMa()).run();
-                    System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
-                    str = (new Scanner(System.in)).nextLine();
-                    clearScreen();
-                    break;
-                case 3:
-                    clearScreen();
-                    System.out.println("Bạn chọn quản lý danh sách bạn đọc!");
+                    System.out.println("Bạn chọn quản lý thủ thư!");
+                    new GiaoDienQuanLyThuThu().run();
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();

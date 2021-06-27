@@ -42,7 +42,7 @@ public class GiaoDienDangNhap {
         }
     }
 
-    public void dangNhap() {
+    public void dangNhap() throws InterruptedException {
         System.out.print("Tên tài khoản: ");
         this.username = (new Scanner(System.in)).nextLine();
         System.out.print("Mật khẩu: ");
@@ -53,13 +53,17 @@ public class GiaoDienDangNhap {
         if (taiKhoan == null) {
             System.out.println("Bạn nhập sai tên tài khoản hoặc mật khẩu! Đăng nhập thất bại!");
         } else {
-            System.out.println("Đăng nhập thành công!");
-            System.out.println("Bạn là: " + taiKhoan.getPhanQuyen());
+//            System.out.println("Đăng nhập thành công!");
+//            System.out.println("Bạn là: " + taiKhoan.getPhanQuyen());
             if(taiKhoan.getPhanQuyen().equals("Thu thu")) {
                 ThuThuController thuThuMn = new ThuThuController();
                 ThuThu thuThu = thuThuMn.tim(taiKhoan.getMaTk());
                 clearScreen();
                 new GiaoDienChinhThuThu(thuThu).run();
+            }
+            else {
+                clearScreen();
+                new GiaoDienChinhQuanTri().run();
             }
         }
     }
@@ -82,19 +86,20 @@ public class GiaoDienDangNhap {
             if (newPass.equalsIgnoreCase(newPass2)) {
                 taiKhoan = new TaiKhoan(taiKhoan.getMaTk(), username, newPass, taiKhoan.getPhanQuyen());
                 tkMn.sua(taiKhoan, taiKhoan.getMaTk());
-                System.out.println("Đăng nhập thành công!");
-                System.out.println("Bạn là: " + taiKhoan.getPhanQuyen());
+                System.out.println("Đổi mật khẩu thành công!");
             } else {
                 System.out.println("Mật khẩu nhập lại không giống với mật khẩu đã nhập trước đó!\nĐổi mật khẩu thất bại!");
             }
         }
     }
 
-    public void run() {
+    public void run() throws InterruptedException {
         GiaoDienDangNhap gd = new GiaoDienDangNhap();
         TaiKhoan t = new TaiKhoan();
         int luaChon;
         do {
+            list = tkMn.getList();
+            Thread.sleep(50);
             System.out.println(" *********************************************************** ");
             System.out.println(" *                   ĐĂNG NHẬP HỆ THỐNG                    * ");
             System.out.println(" *********************************************************** ");

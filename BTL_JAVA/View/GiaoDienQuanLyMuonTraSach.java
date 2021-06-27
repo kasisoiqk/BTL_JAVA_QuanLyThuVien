@@ -85,7 +85,7 @@ public class GiaoDienQuanLyMuonTraSach {
         return index + "";
     }
 
-    public void muonSach() {
+    public void muonSach() throws InterruptedException {
         GiaoDienQuanLyMuonTraSach gd = new GiaoDienQuanLyMuonTraSach(1);
         List<Sach> danhmucHD = new ArrayList<>();
         List<Integer> quantities = new ArrayList<>();
@@ -98,6 +98,7 @@ public class GiaoDienQuanLyMuonTraSach {
         boolean isRun = true;
 
         while (isRun) {
+            Thread.sleep(50);
             System.out.println(" *********************************************************** ");
             System.out.println(" *                       MƯỢN SÁCH                         * ");
             System.out.println(" *********************************************************** ");
@@ -377,10 +378,11 @@ public class GiaoDienQuanLyMuonTraSach {
         clearScreen();
     }
 
-    public void run() {
+    public void run() throws InterruptedException {
         boolean isRun = true;
 
         while (isRun) {
+            Thread.sleep(50);
             System.out.println(" *********************************************************** ");
             System.out.println(" *                       MƯỢN TRẢ SÁCH                     * ");
             System.out.println(" *********************************************************** ");

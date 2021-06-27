@@ -22,7 +22,7 @@ public class GiaoDienQuanLySach {
         }
     }
 
-    public void run() {
+    public void run() throws InterruptedException {
         System.out.println("----Danh sách thông tin sách-----");
         SachController sm = new SachController();
         SachDAO sd = new SachDAO();
@@ -32,6 +32,7 @@ public class GiaoDienQuanLySach {
             String str;
             int luaChon;
             do {
+                Thread.sleep(50);
                 System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
                         "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
                 for (Sach sach : list) {
