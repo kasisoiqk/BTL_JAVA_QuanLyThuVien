@@ -1,6 +1,6 @@
 package BTL_JAVA.View;
 
-import BTL_JAVA.VIEW.GiaoDienQuanLyThuThu;
+import BTL_JAVA.View.GiaoDienQuanLyThuThu;
 import BTL_JAVA.View.GiaoDienQuanLyTaiKhoan;
 import java.awt.Robot;
 import java.util.Scanner;
@@ -56,7 +56,9 @@ public class GiaoDienChinhQuanTri {
                     if(str.equals("yes")) {
                         isRun = false;
                     }
-                    clearScreen();
+                    else {
+                        clearScreen();
+                    }
                     break;
                 default:
                     System.out.print("Vui lòng nhập lại: ");

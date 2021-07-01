@@ -1,4 +1,4 @@
-package BTL_JAVA.VIEW;
+package BTL_JAVA.View;
 
 import BTL_JAVA.Controller.ThuThuController;
 import BTL_JAVA.DAO.ThuThuDAO;
@@ -8,10 +8,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author Dell
- */
 public class GiaoDienQuanLyThuThu implements Serializable {
 
     public void clearScreen() {
@@ -27,8 +23,12 @@ public class GiaoDienQuanLyThuThu implements Serializable {
     }
 
     public void Hienthi() {
-        System.out.println("----------------------Danh sách thủ thư--------------------");
+        System.out.println("\n----------------------Danh sách thủ thư--------------------");
+        System.out.println("/-----------------------------------------------------------------------------------------"
+                + "------------------------------------------------------------\\");
         System.out.format("| %-8s | %-25s | %-10s | %-10s | %-15s | %-25s | %-8s | %-25s |\n", "Mã", "Họ và tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Mã tk", "Chức vụ");
+        System.out.println("|----------|---------------------------|------------|------------|-----------------|-----"
+                + "----------------------|----------|---------------------------|");
     }
 
     public void run() throws InterruptedException {
@@ -44,7 +44,9 @@ public class GiaoDienQuanLyThuThu implements Serializable {
             for (ThuThu thuThu : list) {
                 thuThu.xuat();
             }
-            System.out.println(" *********************************************************** ");
+            System.out.println("\\-----------------------------------------------------------------------------------------"
+                    + "------------------------------------------------------------/");
+            System.out.println("\n *********************************************************** ");
             System.out.println(" *                     QUẢN LÝ THỦ THƯ                     * ");
             System.out.println(" *********************************************************** ");
             System.out.println(" *              1. Thêm thủ thư                            * ");
@@ -63,11 +65,6 @@ public class GiaoDienQuanLyThuThu implements Serializable {
                     System.out.println("Bạn chọn chức năng thêm thông tin");
 
                     Mn.them();
-                    list = dao.read();
-                    menu.Hienthi();
-                    for (ThuThu thuThu : list) {
-                        thuThu.xuat();
-                    }
                     System.out.println("--Thêm thành công--");
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
@@ -82,12 +79,6 @@ public class GiaoDienQuanLyThuThu implements Serializable {
                     t.nhap();
                     t.setMa(mat);
                     Mn.sua(t, mat);
-                    list = dao.read();
-                    menu.Hienthi();
-                    for (ThuThu thuThu : list) {
-                        thuThu.xuat();
-
-                    }
                     System.out.println("--Sửa thành công--");
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
@@ -99,11 +90,6 @@ public class GiaoDienQuanLyThuThu implements Serializable {
                     int ma = (new Scanner(System.in).nextInt());
                     if (Mn.xoa(ma)) {
                         System.out.println("--Xóa thành công--");
-                        list = dao.read();
-                        menu.Hienthi();
-                        for (ThuThu thuThu : list) {
-                            thuThu.xuat();
-                        }
                     } else {
                         System.out.println("Xóa thất bại");
                     }
@@ -118,9 +104,12 @@ public class GiaoDienQuanLyThuThu implements Serializable {
                     list = Mn.TimTheoTen(keywork);
                     if (list.size() > 0) {
                         System.out.println("Ket qua tim kiem:");
+                        Hienthi();
                         for (ThuThu thuThu : list) {
                             thuThu.xuat();
                         }
+                        System.out.println("\\-----------------------------------------------------------------------------------------"
+                                + "------------------------------------------------------------/");
                     } else {
                         System.out.println("Khong tim thay ket qua");
                     }
@@ -130,9 +119,12 @@ public class GiaoDienQuanLyThuThu implements Serializable {
                     break;
                 case 5:
                     System.out.println("Thuc hien chuc nang Sort");
+                    Hienthi();
                     for (ThuThu tt : Mn.sort()) {
-                            tt.xuat();
-                        }
+                        tt.xuat();
+                    }
+                    System.out.println("\\-----------------------------------------------------------------------------------------"
+                            + "------------------------------------------------------------/");
                     System.out.println("");
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();

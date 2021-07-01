@@ -85,6 +85,19 @@ public class GiaoDienQuanLyMuonTraSach {
         return index + "";
     }
 
+    public int checkInputSoLuong(int soLuong, Sach sach) {
+        while (soLuong <= 0 || soLuong > sach.getSoLuongTong()) {
+            if (soLuong <= 0) {
+                System.out.println("Vui lòng nhập só lượng lớn hơn 0!");
+            } else {
+                System.out.println("Số lượng trong thư viện không đủ so với số lượng nhập! (còn lại " + sach.getSoLuongTong() + ")");
+            }
+            System.out.print("Nhập số lượng sách: ");
+            soLuong = (new Scanner(System.in)).nextInt();
+        }
+        return soLuong;
+    }
+
     public void muonSach() throws InterruptedException {
         GiaoDienQuanLyMuonTraSach gd = new GiaoDienQuanLyMuonTraSach(1);
         List<Sach> danhmucHD = new ArrayList<>();
@@ -142,6 +155,7 @@ public class GiaoDienQuanLyMuonTraSach {
                     }
                     System.out.print("Nhập số lượng sách: ");
                     quantity = (new Scanner(System.in)).nextInt();
+                    quantity = checkInputSoLuong(quantity, sachMn.getList().get(Integer.parseInt(ma)));
                     danhmucHD.add(sachMn.getList().get(Integer.parseInt(ma)));
                     quantities.add(quantity);
                     break;
@@ -155,6 +169,7 @@ public class GiaoDienQuanLyMuonTraSach {
                     }
                     System.out.print("Nhập số lượng sách sửa: ");
                     quantity = (new Scanner(System.in)).nextInt();
+                    quantity = checkInputSoLuong(quantity, sachMn.getList().get(Integer.parseInt(ma)));
                     index = Integer.parseInt(ma);
                     quantities.set(index, quantity);
                     break;
@@ -212,8 +227,13 @@ public class GiaoDienQuanLyMuonTraSach {
                         hoaDonMn.them(hoaDon);
                         index = hoaDonMn.timMaHoaDon(hoaDon);
                         for (int i = 0; i < danhmucHD.size(); i++) {
-                            chiTietHoaDons.add(new ChiTietHoaDon(index, danhmucHD.get(i).getMaSach(), danhmucHD.get(i).getGiaSach()));
+                            chiTietHoaDons.add(new ChiTietHoaDon(index, danhmucHD.get(i).getMaSach(), danhmucHD.get(i).getGiaSach(), quantities.get(i)));
                             chiTietHdMn.them(chiTietHoaDons.get(i));
+
+                            Sach s = sachMn.getList().get(sachMn.tim(danhmucHD.get(i).getMaSach(), sachMn.getList()));
+                            s = new Sach(s.getMaSach(), s.getTenSach(), s.getTacGia(), s.getNhaCungCap(),
+                                    s.getNgayNhap(), s.getSoLuongTong() - quantities.get(i), s.getTheLoai(), s.getGiaSach());
+                            sachMn.sua(s, s.getMaSach());
                         }
                         System.out.print("Thanh toán thành công! ");
                     }
@@ -257,7 +277,8 @@ public class GiaoDienQuanLyMuonTraSach {
             for (int i = 0; i < listHoaDon.size(); i++) {
                 System.out.format("| %-5s | %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s | %-10s |\n",
                         i + 1, "HD" + listHoaDon.get(i).getMaHoaDon(), listHoaDon.get(i).getSoLuongSach(), listHoaDon.get(i).getTongSoTien(),
-                        "TT" + listHoaDon.get(i).getMaThuThu(), "SV" + listHoaDon.get(i).getMaBanDoc(), listHoaDon.get(i).getNgayMuon(), listHoaDon.get(i).getNgayTra(), listHoaDon.get(i).getStatus());
+                        "TT" + listHoaDon.get(i).getMaThuThu(), "SV" + listHoaDon.get(i).getMaBanDoc(), listHoaDon.get(i).getNgayMuon(),
+                        listHoaDon.get(i).getNgayTra(), listHoaDon.get(i).getStatus());
             }
             System.out.println("\\--------------------------------------------------------------------------------"
                     + "--------------------------------/");
@@ -279,15 +300,15 @@ public class GiaoDienQuanLyMuonTraSach {
 
             System.out.println("");
             System.out.println("Thông tin chi tiết hóa đơn:");
-            System.out.format("| %-5s | %-8s | %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-15s |\n",
-                "STT", "Mã HD", "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", 
-                "Thể loại", "Ngày nhập", "Giá sách");
+            System.out.format("| %-5s | %-8s | %-10s | %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-15s |\n",
+                    "STT", "Mã HD", "Số lượng", "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp",
+                    "Thể loại", "Ngày nhập", "Giá sách");
             int j = 1;
             for (int i = 0; i < listChiTiet.size(); i++) {
                 if (listChiTiet.get(i).getMaHD() == listHoaDon.get(key - 1).getMaHoaDon()) {
                     int maSach = listChiTiet.get(i).getMaSach();
-                    System.out.format("| %-5s | %-8s ",
-                            j, "HD" + listChiTiet.get(i).getMaHD());
+                    System.out.format("| %-5s | %-8s | %-10s ",
+                            j, "HD" + listChiTiet.get(i).getMaHD(), listChiTiet.get(i).getSoLuong());
                     sachMn.getList().get(sachMn.tim(maSach, sachMn.getList())).xuat(true);
                     j++;
                 }
@@ -317,8 +338,8 @@ public class GiaoDienQuanLyMuonTraSach {
                     + "--------------------------------\\");
             System.out.format("| %-5s | %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s | %-10s |\n",
                     "STT", "Mã HD", "Só lượng", "Tổng tiền", "Mã thủ thư", "Mã bạn đọc", "Ngày mượn", "Ngày trả", "Trạng thái");
-            System.out.println("|--------------------------------------------------------------------------------"
-                    + "--------------------------------|");
+            System.out.println("|-------|----------|----------|-----------------|------------|------------|-------"
+                    + "-----|------------|------------|");
             for (int i = 0; i < listHoaDon.size(); i++) {
                 System.out.format("| %-5s | %-8s | %-8s | %-15s | %-10s | %-10s | %-10s | %-10s | %-10s |\n",
                         i + 1, "HD" + listHoaDon.get(i).getMaHoaDon(), listHoaDon.get(i).getSoLuongSach(), listHoaDon.get(i).getTongSoTien(),
@@ -344,15 +365,16 @@ public class GiaoDienQuanLyMuonTraSach {
 
             System.out.println("");
 
-            System.out.format("| %-5s | %-8s | %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-15s |\n",
-                "STT", "Mã HD", "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", 
-                "Thể loại", "Ngày nhập", "Giá sách");
+            System.out.println("Thông tin chi tiết hóa đơn:");
+            System.out.format("| %-5s | %-8s | %-10s | %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-15s |\n",
+                    "STT", "Mã HD", "Số lượng", "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp",
+                    "Thể loại", "Ngày nhập", "Giá sách");
             int j = 1;
             for (int i = 0; i < listChiTiet.size(); i++) {
                 if (listChiTiet.get(i).getMaHD() == listHoaDon.get(key - 1).getMaHoaDon()) {
                     int maSach = listChiTiet.get(i).getMaSach();
-                    System.out.format("| %-5s | %-8s ",
-                            j, "HD" + listChiTiet.get(i).getMaHD());
+                    System.out.format("| %-5s | %-8s | %-10s ",
+                            j, "HD" + listChiTiet.get(i).getMaHD(), listChiTiet.get(i).getSoLuong());
                     sachMn.getList().get(sachMn.tim(maSach, sachMn.getList())).xuat(true);
                     j++;
                 }
@@ -362,15 +384,27 @@ public class GiaoDienQuanLyMuonTraSach {
             inThongTinBanDoc(banDocMn.timBanDoc(listHoaDon.get(key - 1).getMaBanDoc()));
             System.out.println("");
             System.out.print("Nhập 'yes' để xác nhận trả sách! Nhập bất kỳ khác để hủy: ");
-            String s = (new Scanner(System.in)).nextLine();
+            String str = (new Scanner(System.in)).nextLine();
 
-            if (s.equals("yes")) {
+            if (str.equals("yes")) {
                 HoaDon hd = new HoaDon(listHoaDon.get(key - 1).getMaHoaDon(), listHoaDon.get(key - 1).getSoLuongSach(),
                         listHoaDon.get(key - 1).getTongSoTien(), listHoaDon.get(key - 1).getMaBanDoc(), listHoaDon.get(key - 1).getMaThuThu(),
                         listHoaDon.get(key - 1).getNgayMuon(), listHoaDon.get(key - 1).getNgayTra(), "Đã trả");
                 hoaDonMn.sua(hd, listHoaDon.get(key - 1).getMaHoaDon());
+
+                for (int i = 0; i < listChiTiet.size(); i++) {
+                    if (listChiTiet.get(i).getMaHD() == listHoaDon.get(key - 1).getMaHoaDon()) {
+                        int maSach = listChiTiet.get(i).getMaSach();
+                        Sach s = sachMn.getList().get(sachMn.tim(maSach, sachMn.getList()));
+                        s = new Sach(s.getMaSach(), s.getTenSach(), s.getTacGia(), s.getNhaCungCap(),
+                                s.getNgayNhap(), s.getSoLuongTong() + listChiTiet.get(i).getSoLuong(), s.getTheLoai(), s.getGiaSach());
+                        sachMn.sua(s, s.getMaSach());
+                    }
+                }
+                
+
                 System.out.print("Thành công! Nhấn phím bất kỳ để tiếp tục! ");
-                s = (new Scanner(System.in)).nextLine();
+                str = (new Scanner(System.in)).nextLine();
                 listHoaDon = new HoaDonController().getList();
             }
             clearScreen();
@@ -419,5 +453,9 @@ public class GiaoDienQuanLyMuonTraSach {
                     System.out.print("Vui lòng nhập lại: ");
             }
         }
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+        new GiaoDienQuanLyMuonTraSach(0).run();
     }
 }

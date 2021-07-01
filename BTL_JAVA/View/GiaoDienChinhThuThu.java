@@ -60,6 +60,7 @@ public class GiaoDienChinhThuThu {
                 case 3:
                     clearScreen();
                     System.out.println("Bạn chọn quản lý danh sách bạn đọc!");
+                    new GiaoDienQuanLyBanDoc().run();
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
@@ -70,7 +71,9 @@ public class GiaoDienChinhThuThu {
                     if(str.equals("yes")) {
                         isRun = false;
                     }
-                    clearScreen();
+                    else {
+                        clearScreen();
+                    }
                     break;
                 default:
                     System.out.print("Vui lòng nhập lại: ");

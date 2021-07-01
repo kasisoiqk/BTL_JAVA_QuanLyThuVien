@@ -22,8 +22,43 @@ public class GiaoDienQuanLySach {
         }
     }
 
+    public void nhapSach() {
+        SachController sm = new SachController();
+        List<Sach> list = sm.getList();
+        Sach sach = new Sach();
+        sach.nhap();
+        int masach = sm.kiemTraTrungTen(sach);
+        if (sm.kiemTraTrungTen(sach) == -1) {
+            SachDAO sachDAO = new SachDAO();
+            int ma = (list.size() > 0) ? (list.get(list.size() - 1).getMaSach() + 1) : 1;
+            sach.setMaSach(ma);
+            list.add(sach);
+            sachDAO.write(list, true);
+            System.out.println("******Nhập tài liệu mới thành công******");
+        } else {
+            Sach sach1 = new Sach(list.get(masach).getMaSach(), list.get(masach).getTenSach(), list.get(masach).getTacGia(), list.get(masach).getNhaCungCap(), list.get(masach).getNgayNhap(),
+                    list.get(masach).getSoLuongTong() + sach.getSoLuongTong(), list.get(masach).getTheLoai(), list.get(masach).getGiaSach());
+            sm.sua(sach1, sach1.getMaSach());
+            System.out.println("******Thêm " + sach.getSoLuongTong() + " quyển vào tài liệu " + list.get(masach).getTenSach() + " thành công******");
+        }
+    }
+
+    public void printList(List<Sach> list) {
+        System.out.println("/--------------------------------------------------------------------------------"
+                + "------------------------------------------------------------------------------\\");
+        System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
+                "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
+        System.out.println("|------------|------------------------|---------------------------|----------------"
+                + "------|--------------------|-----------------|------------|-----------------|");
+        for (Sach sach : list) {
+            sach.xuat();
+        }
+        System.out.println("\\--------------------------------------------------------------------------------"
+                + "------------------------------------------------------------------------------/");
+    }
+
     public void run() throws InterruptedException {
-        System.out.println("----Danh sách thông tin sách-----");
+        GiaoDienQuanLySach gd = new GiaoDienQuanLySach();
         SachController sm = new SachController();
         SachDAO sd = new SachDAO();
         List<Sach> list = sd.read();
@@ -33,29 +68,18 @@ public class GiaoDienQuanLySach {
             int luaChon;
             do {
                 Thread.sleep(50);
-                System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
-                        "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
-                for (Sach sach : list) {
-                    sach.xuat();
-                }
-                System.out.println("1: Thêm sách | 2: Sửa thông tin của sách | 3:Xóa sách | 4: Tìm kiếm sách | 5: Sắp xếp | 0:Exit");
+                System.out.println("----Danh sách thông tin sách-----");
+                printList(list);
+                System.out.println("\n1: Thêm sách | 2: Sửa thông tin của sách | 3:Xóa sách | 4: Tìm kiếm sách | 5: Sắp xếp | 0: Quay lại");
                 System.out.print("Vui lòng lựa chọn: ");
                 luaChon = new Scanner(System.in).nextInt();
                 switch (luaChon) {
                     case 1:
-                        if (sm.them()) {
-                            System.out.println("Thêm sách thành công !");
-                            List<Sach> list1 = sd.read();
-                            System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
-                                    "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
-                            for (Sach sach : list1) {
-                                sach.xuat();
-                            }
-                        } else {
-                            System.out.println("Thêm sách không thành công");
-                        }
+                        gd.nhapSach();
+                        System.out.println("Thêm sách thành công !");
                         System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                         str = (new Scanner(System.in)).nextLine();
+                        clearScreen();
                         break;
                     case 2:
 
@@ -79,33 +103,23 @@ public class GiaoDienQuanLySach {
                             list.get(vt).setGiaSach(gia);
                             sm.sua(list.get(vt), ma);
                             System.out.println("Sửa thành công");
-                            List<Sach> list1 = sd.read();
-                            System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
-                                    "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
-                            for (Sach sach : list1) {
-                                sach.xuat();
-                            }
 
                         }
                         System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                         str = (new Scanner(System.in)).nextLine();
+                        clearScreen();
                         break;
                     case 3:
                         System.out.println("Nhập mã sách cần xóa : ");
                         int maSach = new Scanner(System.in).nextInt();
                         if (sm.xoa(maSach)) {
                             System.out.println("Xóa  sách thành công");
-                            List<Sach> list1 = sd.read();
-                            System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
-                                    "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
-                            for (Sach sach : list1) {
-                                sach.xuat();
-                            }
                         } else {
                             System.out.println("Xóa sách thất bại ");
                         }
                         System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                         str = (new Scanner(System.in)).nextLine();
+                        clearScreen();
                         break;
                     case 4:
                         System.out.println("1: Tìm kiếm theo tên sách | 2:Tìm kiếm theo thể loại 3: Hủy ");
@@ -116,11 +130,7 @@ public class GiaoDienQuanLySach {
                                 String tenSach = new Scanner(System.in).nextLine();
                                 List<Sach> listSearch = sm.timkiem(tenSach);
                                 if (listSearch.size() > 0) {
-                                    System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
-                                            "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
-                                    for (Sach sach : listSearch) {
-                                        sach.xuat();
-                                    }
+                                    printList(listSearch);
                                 } else {
                                     System.out.println("Không tìm thấy tên sách " + tenSach);
                                 }
@@ -131,11 +141,7 @@ public class GiaoDienQuanLySach {
                                 String key = new Scanner(System.in).nextLine();
                                 List<Sach> listSearch1 = sm.timkiemEquals(key);
                                 if (listSearch1.size() > 0) {
-                                    System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
-                                            "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
-                                    for (Sach sach1 : listSearch1) {
-                                        sach1.xuat();
-                                    }
+                                    printList(listSearch1);
                                 } else {
                                     System.out.println("Không tìm thấy !");
                                 }
@@ -148,31 +154,33 @@ public class GiaoDienQuanLySach {
                         }
                         System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                         str = (new Scanner(System.in)).nextLine();
+                        clearScreen();
                         break;
                     case 5:
                         //sm.sort();
                         //List<Sach> listSx=sd.read();
-                        System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |" + "\n",
-                                "Mã sách", "Tên sách", "Tác giả", "Nhà cung cấp", "Thể loại", "Ngày nhập", "Số lượng", "Giá sách");
-                        for (Sach sach : sm.sort()) {
-                            sach.xuat();
-                        }
+                        printList(sm.sort());
                         System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                         str = (new Scanner(System.in)).nextLine();
+                        clearScreen();
                         break;
 
                     case 0:
-                        //JOptionPane.showConfirmDialog(null, "Bạn có thực sự muốn thoát không? ", "Xác nhận yêu cầu thoát", JOptionPane.OK_CANCEL_OPTION);
                         break;
                     default:
                         System.out.println("Chọn không đúng ! Vui lòng chọn lại");
+                        System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+                        str = (new Scanner(System.in)).nextLine();
                 }
                 list = sd.read();
-                clearScreen();
             } while (luaChon != 0);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        new GiaoDienQuanLySach().run();
     }
 }

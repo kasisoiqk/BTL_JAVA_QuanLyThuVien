@@ -22,9 +22,11 @@ public class GiaoDienQuanLyTaiKhoan {
     }
 
     public void Hienthi() {
-        System.out.println("----------------------Danh sách tài khoản--------------------");
+        System.out.println("\n----------------------Danh sách tài khoản--------------------");
+        System.out.println("/--------------------------------------------------------------------------\\");
         System.out.format("| %-8s | %-20s | %-20s | %-15s |\n",
                 "Mã TK", "Tên đăng nhập", "Mật khẩu", "Quyền hạn");
+        System.out.println("|----------|----------------------|----------------------|-----------------|");
     }
 
     public void run() throws InterruptedException {
@@ -40,7 +42,8 @@ public class GiaoDienQuanLyTaiKhoan {
             for (TaiKhoan taiKhoan : list) {
                 taiKhoan.xuat();
             }
-            System.out.println(" *********************************************************** ");
+            System.out.println("\\--------------------------------------------------------------------------/");
+            System.out.println("\n *********************************************************** ");
             System.out.println(" *                     QUẢN LÝ TÀI KHOẢN                   * ");
             System.out.println(" *********************************************************** ");
             System.out.println(" *              1. Thêm tài khoản                          * ");
@@ -55,92 +58,78 @@ public class GiaoDienQuanLyTaiKhoan {
             String str;
             switch (chon) {
                 case 1:
-                    System.out.println("Bạn chọn chức năng thêm thông tin");
+                    System.out.println("\nBạn chọn chức năng thêm thông tin");
 
                     Mn.them();
-                    list = dao.read();
-                    menu.Hienthi();
-                    for (TaiKhoan tk : list) {
-                        tk.xuat();
-                    }
-                    System.out.println("--Thêm thành công--");
-                    System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+                    System.out.println("Thêm thành công!");
+                    System.out.print("\nNhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
                     break;
                 case 2:
                     TaiKhoan tk = new TaiKhoan();
-                    System.out.println("Bạn chọn chức năng sửa");
+                    System.out.println("\nBạn chọn chức năng sửa");
                     System.out.print("Nhập mã tài khoản cần sửa: ");
                     int mat = new Scanner(System.in).nextInt();
                     System.out.println("Nhập dữ liệu cần sửa");
                     tk.nhap();
                     tk.setMaTk(mat);
                     Mn.sua(tk, mat);
-                    list = dao.read();
-                    menu.Hienthi();
-                    for (TaiKhoan t : list) {
-                        t.xuat();
-
-                    }
-                    System.out.println("--Sửa thành công--");
-                    System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+                    System.out.println("Sửa thành công!");
+                    System.out.print("\nNhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
                     break;
                 case 3:
-                    System.out.println("Bạn chọn chức năng xóa");
-                    System.out.print("Nhap ma thu thu can xoa:");
+                    System.out.println("\nBạn chọn chức năng xóa");
+                    System.out.print("Nhập mã tài khoản cần xóa:");
                     int ma = (new Scanner(System.in).nextInt());
                     if (Mn.xoa(ma)) {
-                        System.out.println("--Xóa thành công--");
-                        list = dao.read();
-                        menu.Hienthi();
-                        for (TaiKhoan t : list) {
-                            t.xuat();
-
-                        }
+                        System.out.println("Xóa thành công!");
                     } else {
-                        System.out.println("Xóa thất bại");
+                        System.out.println("Xóa thất bại!");
                     }
-                    System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+                    System.out.print("\nNhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
                     break;
                 case 4:
-                    System.out.println("Thuc hien chuc nang Search");
-                    System.out.println("Nhap tu khoa can tim (name): ");
+                    System.out.println("\nThực hiện chức năng tìm kiếm!");
+                    System.out.println("Nhập từ khóa cần tìm (name): ");
                     String keywork = new Scanner(System.in).nextLine();
                     list = Mn.TimTheoTen(keywork);
                     if (list.size() > 0) {
-                        System.out.println("Ket qua tim kiem:");
+                        System.out.println("Kết quả tìm kiếm:");
+                        Hienthi();
                         for (TaiKhoan t : list) {
                             t.xuat();
-
                         }
+                        System.out.println("\\--------------------------------------------------------------------------/");
                     } else {
-                        System.out.println("Khong tim thay ket qua");
+                        System.out.println("Không tìm thấy kết quả!");
                     }
-                    System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+                    System.out.print("\nNhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
                     break;
                 case 5:
-                    System.out.println("Thuc hien chuc nang Sort");
+                    System.out.println("\nThực hiện chức năng sắp xếp!");
+                    Hienthi();
                     for (TaiKhoan tt : Mn.sort()) {
-                            tt.xuat();
-                        }
+                        tt.xuat();
+                    }
+                    System.out.println("\\--------------------------------------------------------------------------/");
                     System.out.println("");
                     System.out.println("");
-                    System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+                    System.out.print("\nNhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
                     break;
                 case 0:
-                    System.out.println("Thuc hien chuc nang Exit");
+                    System.out.println("\nThực hiện chức năng Exit!");
                     break;
                 default:
-                    System.out.println("ko tồn tại chức năng này");
+                    System.out.println("\nKhông tồn tại chức năng này");
                     System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
@@ -148,6 +137,7 @@ public class GiaoDienQuanLyTaiKhoan {
         } while (chon != 0);
 
     }
+
     public static void main(String[] args) throws InterruptedException {
         GiaoDienQuanLyTaiKhoan d = new GiaoDienQuanLyTaiKhoan();
         d.run();

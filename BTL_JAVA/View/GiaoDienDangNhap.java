@@ -43,7 +43,7 @@ public class GiaoDienDangNhap {
     }
 
     public void dangNhap() throws InterruptedException {
-        System.out.print("Tên tài khoản: ");
+        System.out.print("\nTên tài khoản: ");
         this.username = (new Scanner(System.in)).nextLine();
         System.out.print("Mật khẩu: ");
         this.password = (new Scanner(System.in)).nextLine();
@@ -69,7 +69,7 @@ public class GiaoDienDangNhap {
     }
 
     public void doiMatKhau() {
-        System.out.print("Tên tài khoản: ");
+        System.out.print("\nTên tài khoản: ");
         this.username = (new Scanner(System.in)).nextLine();
         System.out.print("Mật khẩu: ");
         this.password = (new Scanner(System.in)).nextLine();
@@ -91,6 +91,7 @@ public class GiaoDienDangNhap {
                 System.out.println("Mật khẩu nhập lại không giống với mật khẩu đã nhập trước đó!\nĐổi mật khẩu thất bại!");
             }
         }
+        System.out.println("");
     }
 
     public void run() throws InterruptedException {
@@ -130,6 +131,7 @@ public class GiaoDienDangNhap {
                     str = (new Scanner(System.in)).nextLine();
                     if(!str.equals("yes")) {
                         luaChon = -1;
+                        clearScreen();
                     }
                     break;
                 default:

@@ -56,7 +56,7 @@ public class ThuThuController {
     public List<ThuThu> TimTheoTen(String Name){
         List<ThuThu> listAns = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTen() == null ? Name == null : list.get(i).getTen().equals(Name)) {
+            if (list.get(i).getTen() == null ? Name == null : list.get(i).getTen().contains(Name)) {
                 listAns.add(list.get(i));
             }            
         }

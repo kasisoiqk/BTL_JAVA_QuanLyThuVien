@@ -100,8 +100,6 @@ public class Sach implements Serializable{
         this.giaSach = giaSach;
     }
     public void nhap(){
-        System.out.print("Nhập mã sách: ");
-        maSach=new Scanner(System.in).nextInt();
         System.out.print("Nhập tên sách: ");
         tenSach=new Scanner(System.in).nextLine();
         System.out.print("Nhập tên tác giả: ");

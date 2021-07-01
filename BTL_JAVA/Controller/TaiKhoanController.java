@@ -56,7 +56,7 @@ public class TaiKhoanController {
     
     public TaiKhoan tim(String username, String password) {
         for(TaiKhoan taiKhoan : list) {
-            if(taiKhoan.getTenDangNhap().equalsIgnoreCase(username) && taiKhoan.getMatKhau().equalsIgnoreCase(password)) {
+            if(taiKhoan.getTenDangNhap().equals(username) && taiKhoan.getMatKhau().equals(password)) {
                 return taiKhoan;
             }
         }
@@ -66,7 +66,7 @@ public class TaiKhoanController {
     public List<TaiKhoan> TimTheoTen(String Name) {
         List<TaiKhoan> listAns = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTenDangNhap() == null ? Name == null : list.get(i).getTenDangNhap().equals(Name)) {
+            if (list.get(i).getTenDangNhap() == null ? Name == null : list.get(i).getTenDangNhap().contains(Name)) {
                 listAns.add(list.get(i));
             }
         }
