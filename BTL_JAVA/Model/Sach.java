@@ -12,8 +12,9 @@ import java.util.Scanner;
  *
  * @author Laptopkhanhtran.vn
  */
-public class Sach implements Serializable{
-    private  int maSach;
+public class Sach implements Serializable {
+
+    private int maSach;
     private String tenSach;
     private String tacGia;
     private String nhaCungCap;
@@ -99,32 +100,35 @@ public class Sach implements Serializable{
     public void setGiaSach(int giaSach) {
         this.giaSach = giaSach;
     }
-    public void nhap(){
+
+    public void nhap() {
         System.out.print("Nhập tên sách: ");
-        tenSach=new Scanner(System.in).nextLine();
+        tenSach = new Scanner(System.in).nextLine();
         System.out.print("Nhập tên tác giả: ");
-        tacGia=new Scanner(System.in).nextLine();
+        tacGia = new Scanner(System.in).nextLine();
         System.out.print("Nhập tên nhà cung cấp: ");
-        nhaCungCap=new Scanner(System.in).nextLine();
+        nhaCungCap = new Scanner(System.in).nextLine();
         System.out.print("Nhập thể loại: ");
-        theLoai=new Scanner(System.in).nextLine();
+        theLoai = new Scanner(System.in).nextLine();
         System.out.print("Nhập ngày nhập sách: ");
-        ngayNhap=new Scanner(System.in).nextLine();
+        ngayNhap = new Scanner(System.in).nextLine();
         System.out.print("Nhập số lượng tổng: ");
-        soLuongTong=new Scanner(System.in).nextInt();
+        soLuongTong = new Scanner(System.in).nextInt();
         System.out.print("Nhập giá sách: ");
-        giaSach=new Scanner(System.in).nextInt();
-        
+        giaSach = new Scanner(System.in).nextInt();
+
     }
-    public void xuat(){
-         System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |\n", 
-                 "S" + maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap, soLuongTong, 
-                 giaSach);
+
+    public void xuat() {
+        System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-10s | %-15s |\n",
+                "S" + maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap, soLuongTong,
+                giaSach);
     }
-    public void xuat(boolean abc){
-         System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-15s |\n", 
-                 "S" + maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap, 
-                 giaSach);
+
+    public void xuat(boolean abc) {
+        System.out.format("| %-10s | %-22s | %-25s | %-20s | %-18s | %-15s | %-15s |\n",
+                "S" + maSach, tenSach, tacGia, nhaCungCap, theLoai, ngayNhap,
+                giaSach);
     }
-    
+
 }

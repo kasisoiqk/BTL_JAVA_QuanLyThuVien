@@ -107,8 +107,6 @@ public class SachController {
             if (sach.getTenSach() != null && sach.getTenSach().contains(tenSach)) {
                 listSearch.add(sach);
 
-            } else {
-                System.out.println("Không tìm thấy tên sách " + tenSach);
             }
 
         }
@@ -131,9 +129,6 @@ public class SachController {
     }
 
     public List<Sach> sort() {
-//         List<Sach> listSort=list;
-//         Collections.sort(listSort);
-//         return listSort;
         List<Sach> listSort = list;
         Collections.sort(listSort, new Comparator<Sach>() {
             @Override

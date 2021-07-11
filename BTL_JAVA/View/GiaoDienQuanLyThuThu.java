@@ -58,7 +58,11 @@ public class GiaoDienQuanLyThuThu implements Serializable {
             System.out.println(" *********************************************************** ");
 
             System.out.print("Vui lòng lựa chọn: ");
-            chon = new Scanner(System.in).nextInt();
+            try {
+                chon = (new Scanner(System.in)).nextInt();
+            } catch (Exception ex) {
+                chon = -1;
+            }
             String str;
             switch (chon) {
                 case 1:

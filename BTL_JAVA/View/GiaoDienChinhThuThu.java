@@ -37,7 +37,14 @@ public class GiaoDienChinhThuThu {
             System.out.println(" *            0. Đăng xuất                                 * ");
             System.out.println(" *********************************************************** ");
             System.out.print(" Lựa chọn chức năng: ");
-            int key = (new Scanner(System.in)).nextInt();
+            
+            int key;
+            try {
+                key = (new Scanner(System.in)).nextInt();
+            }
+            catch(Exception ex) {
+                key = -1;
+            }
             String str;
             
             switch(key) {
@@ -76,7 +83,10 @@ public class GiaoDienChinhThuThu {
                     }
                     break;
                 default:
-                    System.out.print("Vui lòng nhập lại: ");
+                    System.out.print("Vui lòng nhập lại!\n");
+                    System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
+                    str = (new Scanner(System.in)).nextLine();
+                    clearScreen();
             }
         }
     }

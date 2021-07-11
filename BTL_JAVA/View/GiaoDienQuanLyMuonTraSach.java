@@ -132,10 +132,19 @@ public class GiaoDienQuanLyMuonTraSach {
 
             System.out.print("Mời bạn chọn chức năng: ");
 
-            int key = Integer.parseInt((new Scanner(System.in)).nextLine());
+            int key;
+            try {
+                key = (new Scanner(System.in)).nextInt();
+            } catch (Exception ex) {
+                key = -1;
+            }
             while (key < 0 || key > 6) {
                 System.out.print("Yêu cầu nhập lại chức năng: ");
-                key = Integer.parseInt((new Scanner(System.in)).nextLine());
+                try {
+                    key = (new Scanner(System.in)).nextInt();
+                } catch (Exception ex) {
+                    key = -1;
+                }
             }
 
             int index;
@@ -401,7 +410,6 @@ public class GiaoDienQuanLyMuonTraSach {
                         sachMn.sua(s, s.getMaSach());
                     }
                 }
-                
 
                 System.out.print("Thành công! Nhấn phím bất kỳ để tiếp tục! ");
                 str = (new Scanner(System.in)).nextLine();
@@ -427,10 +435,19 @@ public class GiaoDienQuanLyMuonTraSach {
             System.out.println(" *********************************************************** ");
             System.out.print("Mời bạn chọn chức năng: ");
 
-            int key = Integer.parseInt((new Scanner(System.in)).nextLine());
+            int key;
+            try {
+                key = (new Scanner(System.in)).nextInt();
+            } catch (Exception ex) {
+                key = -1;
+            }
             while (key < 0 || key > 3) {
                 System.out.print("Yêu cầu nhập lại chức năng: ");
-                key = Integer.parseInt((new Scanner(System.in)).nextLine());
+                try {
+                    key = (new Scanner(System.in)).nextInt();
+                } catch (Exception ex) {
+                    key = -1;
+                }
             }
 
             switch (key) {
@@ -454,7 +471,7 @@ public class GiaoDienQuanLyMuonTraSach {
             }
         }
     }
-    
+
     public static void main(String[] args) throws InterruptedException {
         new GiaoDienQuanLyMuonTraSach(0).run();
     }

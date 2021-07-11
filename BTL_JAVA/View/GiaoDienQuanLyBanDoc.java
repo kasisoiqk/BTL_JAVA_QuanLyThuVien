@@ -32,7 +32,7 @@ public class GiaoDienQuanLyBanDoc {
                 System.out.println("/---------------------------------------------------------------------------------------------"
                         + "-----------------------------------------\\");
                 System.out.format("| %-14s | %-25s | %-10s | %-10s | %-15s | %-25s | %-15s |\n",
-                    "Mã SV", "Họ và tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Lớp");
+                        "Mã SV", "Họ và tên", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Lớp");
                 System.out.println("|----------------|---------------------------|------------|------------|-----------------|------"
                         + "---------------------|-----------------|");
                 for (BanDoc banDoc : list) {
@@ -42,7 +42,11 @@ public class GiaoDienQuanLyBanDoc {
                         + "-----------------------------------------/ \n");
                 System.out.println("1: Thêm bạn đọc | 2: Sửa thông tin bạn đọc | 3: Xóa bạn đọc | 4: Tìm kiếm | 5: Sắp xếp | 0: Quay lại ");
                 System.out.print("Vui lòng chọn: ");
-                luaChon = new Scanner(System.in).nextInt();
+                try {
+                    luaChon = (new Scanner(System.in)).nextInt();
+                } catch (Exception ex) {
+                    luaChon = -1;
+                }
                 String str;
                 switch (luaChon) {
                     case 1:
@@ -64,7 +68,6 @@ public class GiaoDienQuanLyBanDoc {
                         } else {
                             System.out.println("Nhập dữ liệu:");
                             b.nhap();
-                            b.setMaSV(mab);
                             bm.sua(b, mab);
                             System.out.println("Sửa thông tin bạn đọc thành công !");
                         }

@@ -27,8 +27,8 @@ public class DataReadWriteObject<T> implements Serializable {
     public void setFILE_NAME(String fILE_NAME) {
         FILE_NAME = fILE_NAME;
     }
-
-    public List<T> readFile() {
+    
+    public List<T> readFile() { 
         List<T> list = new ArrayList<>();
         File file = new File(FILE_NAME);
         ObjectInputStream ois = null;
@@ -79,7 +79,7 @@ public class DataReadWriteObject<T> implements Serializable {
         }
         return false;
     }
-
+    
     public boolean writeFile(List<T> list, boolean isNewFile) {
         File file = new File(FILE_NAME);
         ObjectOutputStream oos = null;

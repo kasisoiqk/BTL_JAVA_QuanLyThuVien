@@ -110,7 +110,12 @@ public class GiaoDienDangNhap {
             System.out.println(" *********************************************************** ");
             System.out.print(" Lựa chọn chức năng: ");
 
-            luaChon = (new Scanner(System.in)).nextInt();
+            try {
+                luaChon = (new Scanner(System.in)).nextInt();
+            }
+            catch(Exception ex) {
+                luaChon = -1;
+            }
             String str;
 
             switch (luaChon) {
@@ -140,6 +145,7 @@ public class GiaoDienDangNhap {
                     str = (new Scanner(System.in)).nextLine();
                     clearScreen();
             }
+            
         } while (luaChon != 0);
 
     }

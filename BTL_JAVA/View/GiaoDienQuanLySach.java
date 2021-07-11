@@ -72,7 +72,11 @@ public class GiaoDienQuanLySach {
                 printList(list);
                 System.out.println("\n1: Thêm sách | 2: Sửa thông tin của sách | 3:Xóa sách | 4: Tìm kiếm sách | 5: Sắp xếp | 0: Quay lại");
                 System.out.print("Vui lòng lựa chọn: ");
-                luaChon = new Scanner(System.in).nextInt();
+                try {
+                    luaChon = (new Scanner(System.in)).nextInt();
+                } catch (Exception ex) {
+                    luaChon = -1;
+                }
                 switch (luaChon) {
                     case 1:
                         gd.nhapSach();
@@ -113,7 +117,7 @@ public class GiaoDienQuanLySach {
                         System.out.println("Nhập mã sách cần xóa : ");
                         int maSach = new Scanner(System.in).nextInt();
                         if (sm.xoa(maSach)) {
-                            System.out.println("Xóa  sách thành công");
+                            System.out.println("Xóa sách thành công");
                         } else {
                             System.out.println("Xóa sách thất bại ");
                         }
@@ -171,6 +175,7 @@ public class GiaoDienQuanLySach {
                         System.out.println("Chọn không đúng ! Vui lòng chọn lại");
                         System.out.print("Nhấn phím bất kỳ để tiếp tục! ");
                         str = (new Scanner(System.in)).nextLine();
+                        clearScreen();
                 }
                 list = sd.read();
             } while (luaChon != 0);

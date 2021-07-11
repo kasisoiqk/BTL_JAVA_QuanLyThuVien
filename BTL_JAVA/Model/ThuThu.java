@@ -8,8 +8,6 @@ public class ThuThu extends Nguoi implements  Serializable{
     private String chucVu;
     private int maTk;
 
-   
-    
     public  ThuThu(){
         
     }
